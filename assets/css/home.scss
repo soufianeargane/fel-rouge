@@ -1,0 +1,123 @@
+// media queries
+@use './sass/media' as *; 
+
+// GLOBAL RULES
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+    @include breakpoints(mobile){
+        width: 100%;
+    }
+    @include breakpoints(small){
+        width: 96%;
+    }
+    @include breakpoints(medium){
+        width: 90%;
+    }
+}
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,400&display=swap');
+
+// variables
+
+
+// mixins
+@mixin flex($direction, $justify, $align){
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+// classes
+
+//navbar
+
+nav{
+
+    .nav__app{
+        @include flex(row, space-between , center);
+        background-color: red;
+        @include breakpoints(mobile){
+            background-color: rgb(51, 219, 141);
+            padding: 5px;
+        }
+
+        .f__logo{
+            @include flex(row, space-between , center);
+
+            .logo{
+                width: 40px;
+                height: 40px;
+                // overflow: hidden;
+
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+        .ul__app{
+            
+            ul{
+                @include flex(row, space-between , center);
+                @include breakpoints(mobile){
+                    display: none;
+                }
+                li{
+                    list-style: none;
+                    margin: 0 10px;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: #fff;
+                    cursor: pointer;
+                    a{
+                        text-decoration: none;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        .icon__nav{
+            display: none;
+            @include breakpoints(mobile){
+                display: block;
+                font-size: 2rem;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+    }
+    .show{
+        display: block !important;
+    }
+    .ul__phone{
+        display: none;
+        @include breakpoints(mobile){
+            background-color: rgb(51, 219, 141);
+            ul{
+                @include flex(column, space-between , center);
+                li{
+                    list-style: none;
+                    margin: 10px 0;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: #fff;
+                    cursor: pointer;
+                    a{
+                        text-decoration: none;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
