@@ -1,29 +1,32 @@
 // media queries
 @use './sass/media' as *; 
 
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,400&display=swap');
+
+
 // GLOBAL RULES
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 .container{
     width: 80%;
     margin: 0 auto;
-    @include breakpoints(mobile){
-        width: 100%;
+    @include breakpoints(medium){
+        width: 90%;
     }
     @include breakpoints(small){
         width: 96%;
     }
-    @include breakpoints(medium){
-        width: 90%;
+    @include breakpoints(mobile){
+        width: 100%;
     }
 }
 
-// fonts
-@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,400&display=swap');
 
 // variables
 
@@ -44,8 +47,7 @@ nav{
 
     .nav__app{
         @include flex(row, space-between , center);
-        background-color: red;
-        @include breakpoints(mobile){
+        @include breakpoints(small){
             background-color: rgb(51, 219, 141);
             padding: 5px;
         }
@@ -63,44 +65,58 @@ nav{
                     height: 100%;
                 }
             }
+            p{
+                font-family: 'Lobster';
+                font-size: 20px;
+                    letter-spacing: 3px;
+                @include breakpoints(mobile){
+                    font-size: 20px;
+                    letter-spacing: 2px;
+                }
+            }
         }
         .ul__app{
             
             ul{
                 @include flex(row, space-between , center);
-                @include breakpoints(mobile){
+                @include breakpoints(small){
                     display: none;
                 }
                 li{
                     list-style: none;
                     margin: 0 10px;
-                    font-size: 1.2rem;
+                    font-size: 13px;
                     font-weight: 600;
                     color: #fff;
                     cursor: pointer;
                     a{
                         text-decoration: none;
-                        color: #fff;
+                        color:black;
                     }
                 }
             }
         }
         .icon__nav{
             display: none;
-            @include breakpoints(mobile){
+            @include breakpoints(small){
                 display: block;
                 font-size: 2rem;
-                color: #fff;
+                color: black;
                 cursor: pointer;
             }
         }
     }
     .show{
-        display: block !important;
+        // display: block !important;
+        top: 58px !important;
     }
     .ul__phone{
-        display: none;
-        @include breakpoints(mobile){
+        top: -300px;
+        position: absolute;
+        width: 100%;
+        //show it slow
+        transition: all 0.3s ;
+        @include breakpoints(small){
             background-color: rgb(51, 219, 141);
             ul{
                 @include flex(column, space-between , center);
@@ -119,5 +135,14 @@ nav{
             }
         }
     }
+}
+
+//header
+header{
+    height: calc(100vh - 40px);
+    background-image: url('../img/header-bg-2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 

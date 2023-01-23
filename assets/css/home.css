@@ -2,47 +2,66 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 .container {
   width: 80%;
   margin: 0 auto;
 }
+@media (max-width: 991px) {
+  .container {
+    width: 90%;
+  }
+}
+@media (max-width: 767px) {
+  .container {
+    width: 96%;
+  }
+}
 @media (max-width: 575px) {
   .container {
     width: 100%;
   }
 }
-@media (min-width: 576px) and (max-width: 767px) {
-  .container {
-    width: 96%;
-  }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  .container {
-    width: 90%;
-  }
-}
 
 nav .nav__app {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background-color: red;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
-@media (max-width: 575px) {
+@media (max-width: 767px) {
   nav .nav__app {
     background-color: rgb(51, 219, 141);
     padding: 5px;
   }
 }
 nav .nav__app .f__logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 nav .nav__app .f__logo .logo {
   width: 40px;
@@ -52,13 +71,33 @@ nav .nav__app .f__logo .logo img {
   width: 100%;
   height: 100%;
 }
-nav .nav__app .ul__app ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+nav .nav__app .f__logo p {
+  font-family: "Lobster";
+  font-size: 20px;
+  letter-spacing: 3px;
 }
 @media (max-width: 575px) {
+  nav .nav__app .f__logo p {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+}
+nav .nav__app .ul__app ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+@media (max-width: 767px) {
   nav .nav__app .ul__app ul {
     display: none;
   }
@@ -66,41 +105,54 @@ nav .nav__app .ul__app ul {
 nav .nav__app .ul__app ul li {
   list-style: none;
   margin: 0 10px;
-  font-size: 1.2rem;
+  font-size: 13px;
   font-weight: 600;
   color: #fff;
   cursor: pointer;
 }
 nav .nav__app .ul__app ul li a {
   text-decoration: none;
-  color: #fff;
+  color: black;
 }
 nav .nav__app .icon__nav {
   display: none;
 }
-@media (max-width: 575px) {
+@media (max-width: 767px) {
   nav .nav__app .icon__nav {
     display: block;
     font-size: 2rem;
-    color: #fff;
+    color: black;
     cursor: pointer;
   }
 }
 nav .show {
-  display: block !important;
+  top: 58px !important;
 }
 nav .ul__phone {
-  display: none;
+  top: -300px;
+  position: absolute;
+  width: 100%;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
-@media (max-width: 575px) {
+@media (max-width: 767px) {
   nav .ul__phone {
     background-color: rgb(51, 219, 141);
   }
   nav .ul__phone ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
   nav .ul__phone ul li {
     list-style: none;
@@ -114,4 +166,12 @@ nav .ul__phone {
     text-decoration: none;
     color: #fff;
   }
-}/*# sourceMappingURL=home.css.map */
+}
+
+header {
+  height: calc(100vh - 40px);
+  background-image: url("../img/header-bg-2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
