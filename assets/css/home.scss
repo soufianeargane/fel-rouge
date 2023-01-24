@@ -45,7 +45,6 @@ nav{
     .nav__app{
         @include flex(row, space-between , center);
         @include breakpoints(small){
-            background-color: rgb(51, 219, 141);
             padding: 5px;
         }
 
@@ -108,6 +107,13 @@ nav{
                 font-size: 2rem;
                 color: black;
                 cursor: pointer;
+                &:hover{
+                    border-radius:5px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    color: rgb(88, 82, 82);
+                    background-color: rgb(221, 219, 219);
+                }
             }
         }
     }
@@ -124,20 +130,28 @@ nav{
         
         @include breakpoints(small){
             display: block;
-            background-color: rgb(51, 219, 141);
+            background-color: #fff;
             ul{
                 @include flex(column, space-between , center);
                 li{
                     list-style: none;
-                    margin: 10px 0;
-                    font-size: 1.2rem;
+                    padding: 10px 0;
+                    font-size: 15px;
                     font-weight: 600;
+                    width: 100%;
+                    @include flex(row, center , center);
                     color: #fff;
                     cursor: pointer;
+                    &:hover{
+                        background-color: rgb(207, 207, 207);
+                    }
                     a{
                         text-decoration: none;
-                        color: #fff;
+                        color: black;
                     }
+                }
+                li:last-child{
+                    margin-bottom: 0;
                 }
             }
         }

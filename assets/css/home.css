@@ -39,7 +39,6 @@ nav .nav__app {
 }
 @media (max-width: 767px) {
   nav .nav__app {
-    background-color: rgb(51, 219, 141);
     padding: 5px;
   }
 }
@@ -127,6 +126,13 @@ nav .nav__app .icon__nav {
     color: black;
     cursor: pointer;
   }
+  nav .nav__app .icon__nav:hover {
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: rgb(88, 82, 82);
+    background-color: rgb(221, 219, 219);
+  }
 }
 nav .show {
   top: 58px !important;
@@ -142,7 +148,7 @@ nav .ul__phone {
 @media (max-width: 767px) {
   nav .ul__phone {
     display: block;
-    background-color: rgb(51, 219, 141);
+    background-color: #fff;
   }
   nav .ul__phone ul {
     display: -webkit-box;
@@ -161,15 +167,35 @@ nav .ul__phone {
   }
   nav .ul__phone ul li {
     list-style: none;
-    margin: 10px 0;
-    font-size: 1.2rem;
+    padding: 10px 0;
+    font-size: 15px;
     font-weight: 600;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     color: #fff;
     cursor: pointer;
   }
+  nav .ul__phone ul li:hover {
+    background-color: rgb(207, 207, 207);
+  }
   nav .ul__phone ul li a {
     text-decoration: none;
-    color: #fff;
+    color: black;
+  }
+  nav .ul__phone ul li:last-child {
+    margin-bottom: 0;
   }
 }
 
