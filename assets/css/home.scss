@@ -20,9 +20,6 @@
         width: 90%;
     }
     @include breakpoints(small){
-        width: 96%;
-    }
-    @include breakpoints(mobile){
         width: 100%;
     }
 }
@@ -69,7 +66,7 @@ nav{
                 font-family: 'Lobster';
                 font-size: 20px;
                     letter-spacing: 3px;
-                @include breakpoints(mobile){
+                @include breakpoints(small){
                     font-size: 20px;
                     letter-spacing: 2px;
                 }
@@ -85,13 +82,21 @@ nav{
                 li{
                     list-style: none;
                     margin: 0 10px;
+                    padding: 5px;
                     font-size: 13px;
                     font-weight: 600;
                     color: #fff;
+                    border-radius: 5px;
                     cursor: pointer;
+                    &:hover{
+                        background-color: rgb(207, 207, 207);
+                    }
                     a{
                         text-decoration: none;
                         color:black;
+                        &:hover{
+                            color: rgb(44, 46, 45);
+                        }
                     }
                 }
             }
@@ -114,9 +119,11 @@ nav{
         top: -300px;
         position: absolute;
         width: 100%;
-        //show it slow
-        transition: all 0.3s ;
+        transition: all 0.5s ;
+        display: none;
+        
         @include breakpoints(small){
+            display: block;
             background-color: rgb(51, 219, 141);
             ul{
                 @include flex(column, space-between , center);
@@ -134,6 +141,7 @@ nav{
                 }
             }
         }
+        
     }
 }
 
