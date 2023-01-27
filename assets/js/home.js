@@ -10,14 +10,3 @@ document.addEventListener("click", function (e) {
         document.getElementById("navbar").classList.remove("show");
     }
 });
-// document.getElementById("show-navbar").addEventListener("click", function () {
-//     console.log("show navbar");
-//     document.getElementById("navbar").classList.toggle("show");
-// });
-
-// hide navbar when click outside if it contains class show
-// document.addEventListener("click", function () {
-//     if (document.getElementById("navbar").classList.contains("show")) {
-//         document.getElementById("navbar").classList.remove("show");
-//     }
-// });

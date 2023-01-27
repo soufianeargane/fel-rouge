@@ -1,5 +1,6 @@
 // media queries
 @use './sass/media' as *; 
+@use './sass/colors' as *;
 
 // fonts
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,400&display=swap');
@@ -46,6 +47,9 @@ nav{
         @include flex(row, space-between , center);
         @include breakpoints(small){
             padding: 5px;
+            z-index: 100;
+            background-color: #eee;
+            position: relative;
         }
 
         .f__logo{
@@ -64,7 +68,8 @@ nav{
             p{
                 font-family: 'Lobster';
                 font-size: 20px;
-                    letter-spacing: 3px;
+                letter-spacing: 3px;
+                color: $second-color;
                 @include breakpoints(small){
                     font-size: 20px;
                     letter-spacing: 2px;
@@ -72,12 +77,13 @@ nav{
             }
         }
         .ul__app{
-            
+            @include flex(row, space-between , center);
+            @include breakpoints(small){
+                display: none;
+            }
             ul{
                 @include flex(row, space-between , center);
-                @include breakpoints(small){
-                    display: none;
-                }
+                
                 li{
                     list-style: none;
                     margin: 0 10px;
@@ -96,6 +102,23 @@ nav{
                         &:hover{
                             color: rgb(44, 46, 45);
                         }
+                    }
+                }
+            }
+            a{
+                
+                button{
+                    padding: 5px 40px;
+                    border-radius: 30px;
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    background-color: $third-color;
+                    color: $light-grey;
+                    font-size: 15px;
+                    cursor: pointer;
+                    &:hover{
+                        background-color: $green-color;
                     }
                 }
             }
@@ -124,6 +147,7 @@ nav{
     .ul__phone{
         top: -300px;
         position: absolute;
+        z-index: 1;
         width: 100%;
         transition: all 0.5s ;
         display: none;
@@ -162,7 +186,7 @@ nav{
 //header
 header{
     height: calc(100vh - 40px);
-    background-image: url('../img/header-bg-2.jpg');
+    background-image: url('../img/bg-landing-page.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

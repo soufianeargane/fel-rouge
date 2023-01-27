@@ -40,6 +40,9 @@ nav .nav__app {
 @media (max-width: 767px) {
   nav .nav__app {
     padding: 5px;
+    z-index: 100;
+    background-color: #eee;
+    position: relative;
   }
 }
 nav .nav__app .f__logo {
@@ -69,11 +72,32 @@ nav .nav__app .f__logo p {
   font-family: "Lobster";
   font-size: 20px;
   letter-spacing: 3px;
+  color: #5a4b3c;
 }
 @media (max-width: 767px) {
   nav .nav__app .f__logo p {
     font-size: 20px;
     letter-spacing: 2px;
+  }
+}
+nav .nav__app .ul__app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+@media (max-width: 767px) {
+  nav .nav__app .ul__app {
+    display: none;
   }
 }
 nav .nav__app .ul__app ul {
@@ -90,11 +114,6 @@ nav .nav__app .ul__app ul {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-@media (max-width: 767px) {
-  nav .nav__app .ul__app ul {
-    display: none;
-  }
 }
 nav .nav__app .ul__app ul li {
   list-style: none;
@@ -115,6 +134,20 @@ nav .nav__app .ul__app ul li a {
 }
 nav .nav__app .ul__app ul li a:hover {
   color: rgb(44, 46, 45);
+}
+nav .nav__app .ul__app a button {
+  padding: 5px 40px;
+  border-radius: 30px;
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: #7cbda0;
+  color: #f0faf9;
+  font-size: 15px;
+  cursor: pointer;
+}
+nav .nav__app .ul__app a button:hover {
+  background-color: #679e79;
 }
 nav .nav__app .icon__nav {
   display: none;
@@ -140,6 +173,7 @@ nav .show {
 nav .ul__phone {
   top: -300px;
   position: absolute;
+  z-index: 1;
   width: 100%;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
@@ -201,7 +235,7 @@ nav .ul__phone {
 
 header {
   height: calc(100vh - 40px);
-  background-image: url("../img/header-bg-2.jpg");
+  background-image: url("../img/bg-landing-page.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
