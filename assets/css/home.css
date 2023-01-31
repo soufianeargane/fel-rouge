@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@700;900&family=Lobster&family=Open+Sans:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,700;1,900&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -239,4 +239,78 @@ header {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+header .head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  height: calc(100vh - 40px);
+  width: 400px;
+}
+@media (max-width: 767px) {
+  header .head {
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+@media (min-width: 1500px) {
+  header .head {
+    width: 40%;
+  }
+}
+header .head h1 {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-size: 50px;
+  color: #5a4b3c;
+  margin-bottom: 20px;
+}
+@media (max-width: 767px) {
+  header .head h1 {
+    font-size: 40px;
+    text-align: center;
+  }
+}
+header .head p {
+  font-size: 20px;
+  text-align: justify;
+  -moz-text-align-last: center;
+       text-align-last: center;
+  color: #f0faf9;
+  margin-bottom: 20px;
+}
+@media (max-width: 767px) {
+  header .head p {
+    font-size: 15px;
+  }
+}
+@media (max-width: 767px) {
+  header .head a {
+    margin: 0 auto;
+  }
+}
+header .head a button {
+  padding: 10px 40px;
+  border-radius: 30px;
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: #7cbda0;
+  color: #f0faf9;
+  font-size: 15px;
+  cursor: pointer;
+}
+header .head a button:hover {
+  background-color: #679e79;
 }

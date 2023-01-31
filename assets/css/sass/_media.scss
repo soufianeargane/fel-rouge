@@ -8,8 +8,13 @@
         @content;
         }
     } @else if $point == large {
-        @media (min-width: 992px) {
+        @media (max-width: 1499px) {
+        @content;
+        }
+    } @else if $point == xlarge {
+        @media (min-width: 1500px) {
         @content;
         }
     }
-    }
+}
+    
