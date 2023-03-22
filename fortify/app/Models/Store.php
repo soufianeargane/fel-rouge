@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Store extends Model
 {
@@ -17,4 +18,10 @@ class Store extends Model
         'image',
         'user_id',
     ];
+
+    // get the user who owns the store
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

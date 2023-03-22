@@ -11,4 +11,6 @@ class UserController extends Controller
     {
         return view('client.store');
     }
+
+    
 }

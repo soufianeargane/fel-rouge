@@ -43,6 +43,8 @@ Route::get('redirect', [RedirectController::class, 'redirect'])->middleware(['au
 // admin route with admin and auth middleware
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin', [AdminController::class, 'index'])->name('admin');
+    Route::get('demandes', [AdminController::class, 'demandes'])->name('demandes');
+    Route::get('/demandes/{id}/action/{act}', [AdminController::class, 'action']);
 });
 
 
@@ -57,7 +59,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
 
 // user route
 Route::middleware(['auth', 'user'])->group(function () {
-    // Route::get('user', [UserController::class, 'index'])->name('user');
+    Route::get('user', [UserController::class, 'index'])->name('user');
     // resources route on store
     Route::resource('store', App\Http\Controllers\StoreController::class);
 });

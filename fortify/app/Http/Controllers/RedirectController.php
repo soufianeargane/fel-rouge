@@ -16,7 +16,7 @@ class RedirectController extends Controller
             # code...
             return redirect()->route('owner');
         } else {
-            return redirect()->route('store');
+            return redirect()->route('user');
         }
     }
 }
