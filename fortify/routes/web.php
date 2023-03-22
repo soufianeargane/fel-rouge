@@ -37,8 +37,7 @@ Route::get('profile/password', function () {
 })->middleware(['auth']);
 
 Route::get('redirect', [RedirectController::class, 'redirect'])->middleware(['auth']);
-//user route
-Route::get('user', [UserController::class, 'index'])->name('user')->middleware(['auth']);
+
 
 
 // admin route with admin and auth middleware
@@ -52,4 +51,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
 // Route::get('owner', [OwnerController::class, 'index'])->name('owner')->middleware(['auth']);
 Route::middleware(['auth', 'owner'])->group(function () {
     Route::get('owner', [OwnerController::class, 'index'])->name('owner');
+});
+
+
+
+// user route
+Route::middleware(['auth', 'user'])->group(function () {
+    // Route::get('user', [UserController::class, 'index'])->name('user');
+    // resources route on store
+    Route::resource('store', App\Http\Controllers\StoreController::class);
 });

@@ -49,7 +49,7 @@
                         <li><a href="#">Services</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
-                    <a href="">
+                    <a href="{{url('/login')}}">
                         <button>Login</button>
                     </a>
                 </div>
