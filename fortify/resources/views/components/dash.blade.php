@@ -30,9 +30,9 @@
                     </a>
                 </li>
                 <li>
-                    <a class="flex align-center text-sm text-black rounded-md p-2.5" href="index.html">
+                    <a class="flex align-center text-sm text-black rounded-md p-2.5" href="{{route('admin.categories')}}">
                         <i class="bi bi-bar-chart-steps"></i>
-                        <span>Dashboard</span>
+                        <span>Categories</span>
                     </a>
                 </li>
                 <li>
