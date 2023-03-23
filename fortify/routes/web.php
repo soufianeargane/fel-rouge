@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RedirectController;
 
@@ -60,6 +61,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 // Route::get('owner', [OwnerController::class, 'index'])->name('owner')->middleware(['auth']);
 Route::middleware(['auth', 'owner'])->group(function () {
     Route::get('owner', [OwnerController::class, 'index'])->name('owner');
+    // products route
+    Route::get('owner/products', [ProductController::class, 'index'])->name('owner.products');
+    Route::post('owner/products/store', [ProductController::class, 'store'])->name('owner.products.store');
 });
 
 

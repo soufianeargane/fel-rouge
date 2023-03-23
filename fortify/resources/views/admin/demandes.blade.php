@@ -3,7 +3,7 @@
 
 
     <div class="w-full mx-auto">
-            <div class="flex flex-col">
+        <div class="flex flex-col">
                 <div class="w-full">
                     <div class="p-12 border-b border-gray-200 shadow">
                         <table class="divide-y divide-gray-300 w-full" id="dataTable">
@@ -61,13 +61,10 @@
                         </table>
                     </div>
                 </div>
-            </div>
         </div>
+    </div>
 
- 
-        <p>
-            
-        </p>
+
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
