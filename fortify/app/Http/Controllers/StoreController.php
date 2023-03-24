@@ -81,7 +81,10 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        //
+        // get all products of this store
+        $products = $store->products;
+        return view('client.store-products', compact('products', 'store'));
+
     }
 
     /**

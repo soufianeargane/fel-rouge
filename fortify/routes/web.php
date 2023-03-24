@@ -76,4 +76,5 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('user', [UserController::class, 'index'])->name('user');
     // resources route on store
     Route::resource('store', App\Http\Controllers\StoreController::class);
+    
 });
