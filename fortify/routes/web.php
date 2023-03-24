@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProductController;
@@ -76,5 +77,5 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('user', [UserController::class, 'index'])->name('user');
     // resources route on store
     Route::resource('store', App\Http\Controllers\StoreController::class);
-    
+    Route::post('store/orders', [OrderController::class, 'store'])->name('order.store');
 });

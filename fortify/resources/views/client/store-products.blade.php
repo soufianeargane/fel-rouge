@@ -1,4 +1,6 @@
 <x-store>
+    {{-- store id --}}
+    
     <div class="flex">
         <div class="w-2/3 p-3 ">
             <div id="product-list">
@@ -30,6 +32,8 @@
 </x-store>
 <script>
     var order = [];
+    var total;
+
 
 // when a product's "add to order" button is clicked
 $('.product button').on('click', function() {
@@ -67,8 +71,7 @@ $('.product button').on('click', function() {
 function updateOrderUI() {
   // clear the current order UI
   $('.order').empty();
-  var total = 0;
-
+  total = 0;
   // add each product in the order to the UI
   for (var i = 0; i < order.length; i++) {
     var product = order[i];
@@ -97,16 +100,21 @@ $('#save-order').on('click', function() {
     console.log("siiiiii");
   // send the order to the server
 
-//   $.ajax({
-//     url: '/orders',
-//     method: 'POST',
-//     data: {
-//       order: order
-//     },
-//     success: function(response) {
-//       console.log(response);
-//     }
-//   });
+  $.ajax({
+    url: '/store/orders',
+    method: 'post',
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    data: {
+      order: order,
+      store_id: {{ $store->id }},
+      total_price: total
+    },
+    success: function(response) {
+      console.log(response);
+    }
+  });
 });
 
 </script>
