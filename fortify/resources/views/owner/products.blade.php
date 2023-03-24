@@ -75,7 +75,11 @@
                                         {{$product->category->name}}
                                     </td>
                                     <td class="px-6 py-4 flex justify-center gap-1 text-center">
-                                        <form action="">
+                                        <form 
+                                        action="{{route('owner.products.delete', $product->id)}}"
+                                        method="POST"
+
+                                        >
                                             @csrf
                                             @method('DELETE')
                                             <button

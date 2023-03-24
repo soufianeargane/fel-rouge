@@ -64,6 +64,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // products route
     Route::get('owner/products', [ProductController::class, 'index'])->name('owner.products');
     Route::post('owner/products/store', [ProductController::class, 'store'])->name('owner.products.store');
+    Route::delete('owner/products/delete/{id}', [ProductController::class, 'delete'])->name('owner.products.delete');
 });
 
 

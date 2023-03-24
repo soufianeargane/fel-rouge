@@ -55,4 +55,14 @@ class ProductController extends Controller
         session()->flash('success', 'Produit ajouté avec succès');
         return redirect()->back();
     }
+
+    public function delete($id)
+    {
+        # code...
+        $product = Product::find($id);
+        $this->authorize('delete', $product);
+        $product->delete();
+        session()->flash('success', 'Produit supprimé avec succès');
+        return redirect()->back();
+    }
 }
