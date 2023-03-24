@@ -65,4 +65,41 @@ class ProductController extends Controller
         session()->flash('success', 'Produit supprimé avec succès');
         return redirect()->back();
     }
+
+    public function show($id)
+    {
+        # code...
+        $product = Product::find($id);
+        // $this->authorize('view', $product);
+        return response()->json([
+            'product' => $product,
+        ]);
+
+    }
+
+    public function update(Request $request){
+        // return $request->product_id;
+        $product = Product::find($request->product_id);
+        $this->authorize('delete', $product);
+        $validate = $request->validate([
+            'name' => 'required',
+            'price' => 'required | numeric',
+            'quantity' => 'required | numeric ',
+            'category_id' => 'required | numeric',
+        ]);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->category_id = $request->category_id;
+        $product->quantity = $request->quantity;
+
+        $image = $request->file('image');
+        if($image){
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('img/products'), $image_name);
+            $product->image = $image_name;
+        }
+        $product->save();
+        session()->flash('success', 'Produit modifié avec succès');
+        return redirect()->back();
+    }
 }
