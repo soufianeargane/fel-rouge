@@ -9,7 +9,12 @@
                         <h4>{{ $product->name }}</h4>
                         <p>{{ $product->price }}</p>
                         <p>{{ $product->quantity }}</p>
-                        <button class="add-to-order p-1 bg-red-200">Add to Order</button>
+                        <button
+                          {{-- disable if quantity equal t 0 --}}
+                          @if ($product->quantity == 0)
+                            disabled
+                          @endif
+                         class="add-to-order p-1 bg-red-200 disabled:bg-green-200">Add to Order</button>
                     </div>
                 @endforeach
             </div>
@@ -41,11 +46,17 @@ $('.product button').on('click', function() {
   var product_id = $(this).closest('.product').data('id');
   var product_name = $(this).closest('.product').find('h4').text();
   var product_price = $(this).closest('.product').find('p').eq(0).text();
+  var product_quantity = $(this).closest('.product').find('p').eq(1).text();
 
   // check if the product is already in the order
   var found = false;
   for (var i = 0; i < order.length; i++) {
     if (order[i].id == product_id) {
+      if( order[i].quantity == (product_quantity - 1)){
+        // alert('the quantity is not available');
+        // disable the button
+        $(this).attr('disabled', true);
+      }
       order[i].quantity++;
       found = true;
       break;
