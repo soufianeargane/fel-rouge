@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Store;
+use App\Mail\NewOrder;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -43,8 +46,20 @@ class OrderController extends Controller
             $product->save();
         }
 
+
+        $user = auth()->user();
+
+        // get email of store owner
+        $store = Store::find($store_id);
+        $store_owner = $store->user;
+        $store_owner_email = $store_owner->email;
+
+        // send email to store owner
+        Mail::to($store_owner_email)->send(new NewOrder($user));
+
         return response()->json([
             'status' => 'success',
+            'store_owner_email' => 'email sent to store owner'
         ]);
     }
 }
