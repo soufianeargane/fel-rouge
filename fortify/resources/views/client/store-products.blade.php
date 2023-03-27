@@ -1,21 +1,21 @@
 <x-store>
     {{-- store id --}}
-    
+
     <div class="flex">
         <div class="w-2/3 p-3 ">
             <div id="product-list">
                 @foreach ($products as $product)
-                    <div class="product" data-id="{{ $product->id }}">
-                        <h4>{{ $product->name }}</h4>
-                        <p>{{ $product->price }}</p>
-                        <p>{{ $product->quantity }}</p>
-                        <button
-                          {{-- disable if quantity equal t 0 --}}
-                          @if ($product->quantity == 0)
-                            disabled
-                          @endif
-                         class="add-to-order p-1 bg-red-200 disabled:bg-green-200">Add to Order</button>
-                    </div>
+                <div class="product" data-id="{{ $product->id }}">
+                    <h4>{{ $product->name }}</h4>
+                    <p>{{ $product->price }}</p>
+                    <p>{{ $product->quantity }}</p>
+                    <button {{-- disable if quantity equal t 0 --}} @if ($product->quantity == 0)
+                        disabled
+                        @endif
+                        class="add-to-order p-1 bg-red-200 disabled:bg-green-200">Add to Order</button>
+                        <!-- decrease button -->
+                        <button class="decrease px-2 py-1 bg-orange-200 disabled:bg-blue-200" disabled>-</button>
+                </div>
                 @endforeach
             </div>
         </div>
@@ -27,9 +27,7 @@
                 <span id="total-price"></span>
                 Dhs
             </div>
-            <div class=""
-            style="position: absolute; bottom: 0; left: 50%; transform: translate(-50%);"
-            >
+            <div class="" style="position: absolute; bottom: 0; left: 50%; transform: translate(-50%);">
                 <button id="save-order" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">save</button>
             </div>
         </div>
@@ -38,102 +36,134 @@
 <script>
     var order = [];
     var total;
+    // when a product's "add to order" button is clicked
+    $('.add-to-order').on('click', function() {
+        // get the product's ID, name, and price
+        var product_id = $(this).closest('.product').data('id');
+        var product_name = $(this).closest('.product').find('h4').text();
+        var product_price = $(this).closest('.product').find('p').eq(0).text();
+        var product_quantity = $(this).closest('.product').find('p').eq(1).text();
 
+        // check if the product is already in the order
+        var found = false;
+        for (var i = 0; i < order.length; i++) {
+            if (order[i].id == product_id) {
+                // if quantity = 1 disable the button
+                if ((order[i].quantity + 1) == (product_quantity - 0)) {
+                    // alert('the quantity is not available');
+                    // disable the button
+                    $(this).attr('disabled', true);
+                }
+                order[i].quantity++;
+                found = true;
+                break;
+            }
+        }
 
-// when a product's "add to order" button is clicked
-$('.add-to-order').on('click', function() {
-  // get the product's ID, name, and price
-  var product_id = $(this).closest('.product').data('id');
-  var product_name = $(this).closest('.product').find('h4').text();
-  var product_price = $(this).closest('.product').find('p').eq(0).text();
-  var product_quantity = $(this).closest('.product').find('p').eq(1).text();
+        // if the product is not in the order, add it with a quantity of 1
+        if (!found) {
+            order.push({
+                id: product_id,
+                name: product_name,
+                price: parseFloat(product_price),
+                quantity: 1
+            });
 
-  // check if the product is already in the order
-  var found = false;
-  for (var i = 0; i < order.length; i++) {
-    if (order[i].id == product_id) {
-      // if quantity = 1 disable the button
-      if( (order[i].quantity + 1) == (product_quantity - 0) ){
-        // alert('the quantity is not available');
-        // disable the button
-        $(this).attr('disabled', true);
-      }
-      order[i].quantity++;
-      found = true;
-      break;
-    }
-  }
+            //able the button of decrease
+            $(this).closest('.product').find('.decrease').attr('disabled', false);
+        }
 
-  // if the product is not in the order, add it with a quantity of 1
-  if (!found) {
-    order.push({
-      id: product_id,
-      name: product_name,
-      price: parseFloat(product_price),
-      quantity: 1
+        // if quantity = 1 disable the button
+        if (product_quantity == 1) {
+            // alert('the quantity is not available');
+            // disable the button
+            $(this).attr('disabled', true);
+        }
+
+        console.log(order);
+        // update the UI to reflect the new order
+        updateOrderUI();
     });
-  }
 
-  // if quantity = 1 disable the button
-  if(product_quantity == 1){
-    // alert('the quantity is not available');
-    // disable the button
-    $(this).attr('disabled', true);
-  }
 
-  console.log(order);
-  // update the UI to reflect the new order
-  updateOrderUI();
-});
+    // when a product's "decrease" button is clicked
+    $('.decrease').on('click', function() {
+        // get the product's ID, name, and price
+        var product_id = $(this).closest('.product').data('id');
+        var product_quantity = $(this).closest('.product').find('p').eq(1).text();
 
-// a function to update the UI with the current order
-function updateOrderUI() {
-  // clear the current order UI
-  $('.order').empty();
-  total = 0;
-  // add each product in the order to the UI
-  for (var i = 0; i < order.length; i++) {
-    var product = order[i];
-    var $product = $('<div>').addClass('product');
-    var $name = $('<h4>').text(product.name);
-    total += product.price * product.quantity;
-    var $price = $('<p>').text(product.price);
-    var $quantity = $('<p>').text('Quantity: ' + product.quantity);
+        // check if the product is already in the order
+        var found = false;
+        for (var i = 0; i < order.length; i++) {
+            if (order[i].id == product_id) {
+                // if quantity = 1 disable the button
+                order[i].quantity--;
+                if (order[i].quantity  == 0) {
+                    // disable the button
+                    $(this).attr('disabled', true);
 
-    $product.append($name, $price, $quantity);
-    $('.order').append($product);
-  }
-    //   var $total = $('<p>').text('Total: ' + total);
-    //     $('.order').append($total);
-    // show the total price in element with id "total-price"
-    $('#total-price').text(total);
-}
+                    // remove the product from the order
+                    order.splice(i, 1);
+                }
+                // able the button of add to order
+                $(this).closest('.product').find('.add-to-order').attr('disabled', false);
+                break;
+            }
+        }
 
-// when the "save" button is clicked
-$('#save-order').on('click', function() {
-    // check if the order is empty
-    if (order.length == 0) {
-        alert('Please add some products to the order');
-        return;
+
+        console.log(order);
+        // update the UI to reflect the new order
+        updateOrderUI();
+    });
+
+    // a function to update the UI with the current order
+    function updateOrderUI() {
+        // clear the current order UI
+        $('.order').empty();
+        total = 0;
+        // add each product in the order to the UI
+        for (var i = 0; i < order.length; i++) {
+            var product = order[i];
+            var $product = $('<div>').addClass('product');
+            var $name = $('<h4>').text(product.name);
+            total += product.price * product.quantity;
+            var $price = $('<p>').text(product.price);
+            var $quantity = $('<p>').text('Quantity: ' + product.quantity);
+
+            $product.append($name, $price, $quantity);
+            $('.order').append($product);
+        }
+        //   var $total = $('<p>').text('Total: ' + total);
+        //     $('.order').append($total);
+        // show the total price in element with id "total-price"
+        $('#total-price').text(total);
     }
-    console.log("siiiiii");
-  // send the order to the server
 
-  $.ajax({
-    url: '/store/orders',
-    method: 'post',
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
-    data: {
-      order: order,
-      store_id: {{ $store->id }},
-      total_price: total
-    },
-    success: function(response) {
-      console.log(response);
-    }
-  });
-});
+    // when the "save" button is clicked
+    $('#save-order').on('click', function() {
+        // check if the order is empty
+        if (order.length == 0) {
+            alert('Please add some products to the order');
+            return;
+        }
+        console.log("siiiiii");
+        // send the order to the server
 
+        $.ajax({
+            url: '/store/orders',
+            method: 'post',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                order: order,
+                store_id: {{$store->id}},
+                total_price: total
+            },
+            success: function(response) {
+                console.log(response);
+            }
+        });
+    });
 </script>

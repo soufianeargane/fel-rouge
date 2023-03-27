@@ -48,7 +48,6 @@ class StoreController extends Controller
                 'required',
                 'regex:/^(?:\+212|0)[1-9][\d]{8}$/'
             ],
-            'email' => 'required|email',
             'city' => 'required',
             'neighborhood' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -59,7 +58,6 @@ class StoreController extends Controller
         $form_data = array(
             'title' => $request->title,
             'phone' => $request->phone,
-            'email' => $request->email,
             'city' => $request->city,
             'neighborhood' => $request->neighborhood,
             'image' => $new_name,

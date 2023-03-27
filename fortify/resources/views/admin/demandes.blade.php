@@ -19,9 +19,6 @@
                                         Title
                                     </th>
                                     <th class="px-6 py-2 text-xs text-gray-500">
-                                        Email
-                                    </th>
-                                    <th class="px-6 py-2 text-xs text-gray-500">
                                         Phone
                                     </th>
                                     <th class="px-6 py-2 text-xs text-gray-500">
@@ -43,11 +40,8 @@
                                         {{$store->title}}
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 text-center">
-                                        <div class="text-sm text-gray-500">{{$store->email}}</div>
-                                    </td>
                                     <td class="px-6 py-4 text-sm text-center text-gray-500">
-                                    {{$store->city}}
+                                    {{$store->phone}}
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <a href="/demandes/{{$store->id}}/action/1"
