@@ -41,7 +41,7 @@
 
 
 // when a product's "add to order" button is clicked
-$('.product button').on('click', function() {
+$('.add-to-order').on('click', function() {
   // get the product's ID, name, and price
   var product_id = $(this).closest('.product').data('id');
   var product_name = $(this).closest('.product').find('h4').text();
@@ -52,7 +52,8 @@ $('.product button').on('click', function() {
   var found = false;
   for (var i = 0; i < order.length; i++) {
     if (order[i].id == product_id) {
-      if( order[i].quantity == (product_quantity - 1)){
+      // if quantity = 1 disable the button
+      if( (order[i].quantity + 1) == (product_quantity - 0) ){
         // alert('the quantity is not available');
         // disable the button
         $(this).attr('disabled', true);
@@ -71,6 +72,13 @@ $('.product button').on('click', function() {
       price: parseFloat(product_price),
       quantity: 1
     });
+  }
+
+  // if quantity = 1 disable the button
+  if(product_quantity == 1){
+    // alert('the quantity is not available');
+    // disable the button
+    $(this).attr('disabled', true);
   }
 
   console.log(order);
