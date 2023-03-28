@@ -71,6 +71,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
 
     // orders route
     Route::get('owner/orders', [OrderController::class, 'index'])->name('owner.orders');
+    Route::get('/owner/orders-details/{id}', [OrderController::class, 'show']);
 });
 
 

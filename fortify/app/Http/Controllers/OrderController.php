@@ -65,14 +65,16 @@ class OrderController extends Controller
 
     public function index(){
         // get all orders of owner
-        // $user_id = auth()->user()->id;
+        $user_id = auth()->user()->id;
         //get store of owner
-        // $store = Store::where('user_id', $user_id)->first();
-        // $store_id = $store->id;
-        // $orders = Order::where('store_id', $store_id)
-        //                 ->with('products')
-        //                 ->withPivot('quantity')
-        //                 ->get();
+        $store = Store::where('user_id', $user_id)->first();
+        $store_id = $store->id;
+        $orders = Order::where('store_id', $store_id)
+                ->with('products', function ($query) {
+                    $query->withPivot('quantity');
+                })
+                ->get();
+
         // $order = Order::with('products')
         //                 ->where('store_id', $store_id)
         //                 ->find(1);
@@ -84,5 +86,18 @@ class OrderController extends Controller
             // foreach ($order->products as $product) {
             //     echo $product->name . " - " . $product->pivot->quantity . " units\n";
             // }
+        return view('owner.orders', compact('orders'));
+    }
+
+    public function show($id)
+    {
+        $products = Order::findOrFail($id)
+                        ->products()
+                        ->withPivot('quantity')
+                        ->get();
+        return response()->json([
+            'status' => 'success',
+            'quantity' => $products[0]->pivot->quantity // update variable name here
+        ]);
     }
 }
