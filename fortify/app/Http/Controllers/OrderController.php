@@ -97,7 +97,7 @@ class OrderController extends Controller
                         ->get();
         return response()->json([
             'status' => 'success',
-            'quantity' => $products[0]->pivot->quantity // update variable name here
+            'data' => $products // update variable name here
         ]);
     }
 }
