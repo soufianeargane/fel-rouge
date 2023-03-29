@@ -71,7 +71,11 @@ Route::middleware(['auth', 'owner'])->group(function () {
 
     // orders route
     Route::get('owner/orders', [OrderController::class, 'index'])->name('owner.orders');
+    Route::post('owner/orders/action', [OrderController::class, 'action'])->name('owner.orders.action');
     Route::get('/owner/orders-details/{id}', [OrderController::class, 'show']);
+
+    // to download pdf
+    Route::get('/download-pdf', [OrderController::class, 'downloadPdf']);
 });
 
 

@@ -1,6 +1,14 @@
 <x-owner>
     <p>Orders</p>
 
+    <!-- if session has succes -->
+    @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Success!</strong>
+            <span class="block sm:inline">{{ session('success') }}</span>
+        </div>
+    @endif
+
     <div>
     <table class="divide-y divide-gray-300 w-full text-center" id="dataTable">
             <thead>
@@ -21,10 +29,20 @@
                         <td>{{ $order->total_price }}</td>
                         <td>{{ $order->created_at }}</td>
                         <td>
+                            <div class=" px-2 py-1 rounded font-bold
+                            @if($order->status == 0)
+                                text-orange-500
+                            @elseif($order->status == 1)
+                                text-green-800
+                            @else
+                                text-red-500
+                            @endif
+                            ">
                             {{
                             $order->status == 0 ? 'Pending' :
                             ($order->status == 1 ? 'Accepted' : 'Rejected')
                         }}
+                            </div>
 
                         </td>
                         <td>
@@ -33,16 +51,16 @@
                                     View
                                 </button>
                                 @if($order->status == 0)
-                                    <form action="" method="POST">
+                                    <form action="{{route('owner.orders.action')}}" method="POST">
                                         @csrf
-                                        @method('PUT')
                                         <input type="hidden" name="status" value="1">
+                                        <input type="hidden" name="order_id" value="{{ $order->id }}">
                                         <button type="submit" class="px-2 py-1 bg-green-300 rounded">Accept</button>
                                     </form>
-                                    <form action="" method="POST">
+                                    <form action="{{route('owner.orders.action')}}" method="POST">
                                         @csrf
-                                        @method('PUT')
                                         <input type="hidden" name="status" value="2">
+                                        <input type="hidden" name="order_id" value="{{ $order->id }}">
                                         <button type="submit" class="px-2 py-1 bg-red-300 rounded">Reject</button>
                                     </form>
                                 @endif
@@ -76,6 +94,7 @@
             </div>
             <!-- Modal body -->
             <div id="modal-body" class="p-6 space-y-6">
+
 
             </div>
             <!-- Modal footer -->
@@ -111,29 +130,51 @@
             });
         });
 
-        function renderProducts(response){
-            // all products and quantity in table
-            var products = response.data;
-            var html = '';
-            products.forEach(product => {
-                html += `
-                    <table class="w-full text-center">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>${product.name}</td>
-                            <td>${product.pivot.quantity}</td>
-                        </tr>
-                    </tbody>
-                    </table>
-                `;
-                // append to modal body
-                $('#modal-body').html(html);
-            });
-        }
+        function renderProducts(response) {
+    // all products and quantity in table
+    var products = response.data;
+    var html = `
+        <table class="w-full text-center">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    products.forEach(product => {
+        html += `
+            <tr>
+                <td>${product.name}</td>
+                <td>${product.pivot.quantity}</td>
+            </tr>
+        `;
+    });
+    html += `
+            </tbody>
+        </table>
+    `;
+    // append to modal body
+    $('#modal-body').html(html);
+
+    // Add download button
+    var downloadButton = `
+        <a href="#" class="btn btn-primary" id="download-pdf-btn">Download PDF</a>
+    `;
+    $('#modal-body').append(downloadButton);
+
+    // Handle download button click event
+    $('#download-pdf-btn').on('click', function() {
+        // Get HTML content of table
+        var tableHtml = $('#modal-body table').parent().html();
+
+        // URL-encode HTML content
+        var urlEncodedHtml = encodeURIComponent(tableHtml);
+
+        // Generate PDF using Laravel controller method
+        window.location.href = '/download-pdf?html=' + urlEncodedHtml;
+    });
+}
+
     </script>

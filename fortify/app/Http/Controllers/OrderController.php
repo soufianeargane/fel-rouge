@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
+use Dompdf\Dompdf;
+
+
 class OrderController extends Controller
 {
     //
@@ -99,5 +102,63 @@ class OrderController extends Controller
             'status' => 'success',
             'data' => $products // update variable name here
         ]);
+    }
+
+
+    public function downloadPdf(Request $request)
+    {
+        // Get the HTML content of the table from the "html" query parameter
+        $html = $request->input('html');
+
+        // Create new instance of Dompdf class
+        $pdf = new Dompdf();
+
+        // Load HTML content into Dompdf instance
+        $pdf->loadHtml($html);
+
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'landscape');
+
+        // Render PDF
+        $pdf->render();
+
+        // style the pdf
+
+        // make font size bigger of table in pdf
+        $pdf->set_option('defaultFont', 'Courier');
+        $pdf->set_option('defaultFont', 'Courier');
+        $pdf->set_option('isFontSubsettingEnabled', true);
+        $pdf->set_option('isHtml5ParserEnabled', true);
+        $pdf->set_option('isRemoteEnabled', true);
+
+        // Generate response with PDF file as download attachment
+        return $pdf->stream('table.pdf');
+    }
+
+
+    public function action(Request $request)
+    {
+        # code...
+        if ($request->status == 1) {
+            // accept order
+            $order = Order::find($request->order_id);
+            $order->status = 1;
+            $order->save();
+
+            return redirect()->back()->with('success', 'Order accepted');
+
+
+        }else if ($request->status == 2) {
+            // reject order
+            $order = Order::find($request->order_id);
+            $order->status = 2;
+            $order->save();
+
+            return redirect()->back()->with('success', 'Order rejected');
+        }
+        else {
+            # code...
+            return abort(404);
+        }
     }
 }
