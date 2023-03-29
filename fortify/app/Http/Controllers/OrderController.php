@@ -152,6 +152,17 @@ class OrderController extends Controller
             // reject order
             $order = Order::find($request->order_id);
             $order->status = 2;
+            // get quantity of products in order
+            $products = $order->products;
+            foreach ($products as $product) {
+                # code...
+                $product_id = $product->id;
+                $quantity = $product->pivot->quantity;
+                // update quantity of product
+                $product = Product::find($product_id);
+                $product->quantity += $quantity;
+                $product->save();
+            }
             $order->save();
 
             return redirect()->back()->with('success', 'Order rejected');
