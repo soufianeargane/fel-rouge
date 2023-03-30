@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -85,5 +86,6 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('user', [UserController::class, 'index'])->name('user');
     // resources route on store
     Route::resource('store', App\Http\Controllers\StoreController::class);
+    Route::get('store/{id}/details', [StoreController::class, 'details'])->name('store.details');
     Route::post('store/orders', [OrderController::class, 'store'])->name('order.store');
 });

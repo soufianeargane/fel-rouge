@@ -19,7 +19,9 @@ class StoreController extends Controller
     public function index()
     {
         //
-        return view('client.store');
+        $accepted_stores = Store::where('status', '1')->get();
+        // dd($accepted_stores);
+        return view('client.store', compact('accepted_stores'));
     }
 
     /**
@@ -65,8 +67,6 @@ class StoreController extends Controller
         );
         Store::create($form_data);
         // session flash success
-        // return redirect()->route('store')->with('message', 'your request was added successfully. you will be informed via email if you get accepted .');
-        // return view('client.store')->with('message', 'your request was added successfully. you will be informed via email if you get accepted .');
         session()->flash('message', 'your request was added successfully. you will be informed via email if you get accepted .' );
         return redirect()->back();
     }
@@ -117,5 +117,15 @@ class StoreController extends Controller
     public function destroy(Store $store)
     {
         //
+    }
+
+    public function details($id)
+    {
+        // get the store with the given id
+        $store = Store::find($id);
+        // get all products of this store
+        $products = $store->products;
+
+        return view('client.store-details', compact('products', 'store'));
     }
 }
