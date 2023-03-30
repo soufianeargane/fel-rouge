@@ -125,23 +125,34 @@
             Buy now
         </button>
     </a>
+    <!-- input search -->
+    <input id="search-input" type="text"
+        class="relative m-0  flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary-600 focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
+        placeholder="Search"
+        >
 
         <div class="flex gap-2 flex-wrap">
             @foreach ($products as $product)
-            <div class="mt-6 ">
+            <div class="mt-4 p-2">
         <div class="group relative">
-            <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-            <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+            <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 ">
+            <img
+            src="{{ asset('img/products/'.$product->image)}}" width="250px" height="300px"  class=" object-cover object-center">
             </div>
             <div class="mt-4 flex justify-between">
             <div>
-                <h3 class="text-sm text-gray-700">
+                <h3 class="text-sm text-gray-700 search-js">
+
                     <span aria-hidden="true" class="absolute inset-0"></span>
-                    Basic Tee
+                    {{ $product->name }}
                 </h3>
-                <p class="mt-1 text-sm text-gray-500">Black</p>
+                <p class="mt-1 text-sm text-gray-500">
+                    {{ $product->category->name }}
+                </p>
             </div>
-            <p class="text-sm font-medium text-gray-900">$35</p>
+            <p class="text-sm font-medium text-gray-900">
+                {{ $product->price }} DHs
+            </p>
             </div>
             </div>
 
@@ -154,4 +165,23 @@
   </div>
 </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+    <script>
+        // search on keyup by h3 with class search-js and hide the div
+        $(document).ready(function(){
+            $("#search-input").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                console.log(value);
+                $(".search-js").filter(function() {
+                $(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+
+
+    </script>
+
 </x-store>
