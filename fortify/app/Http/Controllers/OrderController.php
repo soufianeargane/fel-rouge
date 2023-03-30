@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Dompdf\Dompdf;
 use App\Models\Order;
 use App\Models\Store;
 use App\Mail\NewOrder;
 use App\Models\Product;
+use App\Mail\OrderAccepted;
 use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
-
-use Dompdf\Dompdf;
 
 
 class OrderController extends Controller
@@ -77,18 +78,6 @@ class OrderController extends Controller
                     $query->withPivot('quantity');
                 })
                 ->get();
-
-        // $order = Order::with('products')
-        //                 ->where('store_id', $store_id)
-        //                 ->find(1);
-
-
-
-            // echo "Order #" . $order->id . ":\n";
-
-            // foreach ($order->products as $product) {
-            //     echo $product->name . " - " . $product->pivot->quantity . " units\n";
-            // }
         return view('owner.orders', compact('orders'));
     }
 
@@ -144,6 +133,18 @@ class OrderController extends Controller
             $order = Order::find($request->order_id);
             $order->status = 1;
             $order->save();
+
+            // get email of user who made order
+            $user = $order->user;
+            $user_email = $user->email;
+            $user_name = $user->name;
+
+            // title of store
+            $store = $order->store;
+            $store_name = $store->title;
+
+            // send email to user
+            Mail::to($user_email)->send(new OrderAccepted($store_name, $order->id, $order->total_price, $user_name ));
 
             return redirect()->back()->with('success', 'Order accepted');
 
