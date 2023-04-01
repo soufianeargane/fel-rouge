@@ -22,12 +22,14 @@
                         Some quick example text to build on the card title and make up the
                         bulk of the card's content.
                     </p>
-                    <button
-                        type="button"
-                        class="px-4 py-2 font-semibold text-white transition-colors duration-200 transform bg-blue-600 rounded-md dark:bg-blue-500 hover:bg-blue-500 dark:hover:bg-blue-400 focus:outline-none focus:bg-blue-500 dark:focus:bg-blue-400"
-                                                >
-                        Button
-                    </button>
+                    <a href="/admin/store-details/{{$store->id}}">
+                        <button
+                            type="button"
+                            class="px-4 py-2 font-semibold text-white transition-colors duration-200 transform bg-blue-600 rounded-md dark:bg-blue-500 hover:bg-blue-500 dark:hover:bg-blue-400 focus:outline-none focus:bg-blue-500 dark:focus:bg-blue-400"
+                                                    >
+                            Button
+                        </button>
+                    </a>
                     </div>
                 </div>
                 @endforeach

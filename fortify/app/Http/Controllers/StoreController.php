@@ -140,4 +140,59 @@ class StoreController extends Controller
         $stores = Store::with('city')->get();
         return view('admin.stores', compact('stores'));
     }
+
+    public function allDetails($id)
+    {
+        # code...
+        /*
+        total profit from last month:
+            $last_month_orders = $store->orders()
+                ->whereBetween('created_at', [now()->subMonth(), now()])
+                ->get();
+
+            foreach ($last_month_orders as $order) {
+                $total_orders++;
+                if ($order->status == 1) {
+                    $total_profit += $order->total_price;
+                    $total_orders_accepted++;
+                } else {
+                    $total_orders_rejected++;
+                }
+            }
+
+            $products = $store->products;
+            $product_count = $products->count();
+
+            // $total_profit contains the total profit of the store from last month
+         */
+        // ===================================================
+        
+        $store = Store::find($id);
+        if(!$store){
+            return abort(404, 'store not found');
+        }
+        $total_profit = 0;
+        $total_orders = 0;
+        $total_orders_accepted = 0;
+        $total_orders_rejected = 0;
+
+        foreach($store->orders as $order){
+            $total_orders++;
+            if($order->status == 1){
+                $total_profit += $order->total_price;
+                $total_orders_accepted++;
+            }else{
+                $total_orders_rejected++;
+            }
+        }
+        $products = $store->products;
+        $product_count = $products->count();
+        
+        return view('admin.store-alldetails', compact('store', 'total_profit', 'total_orders', 'total_orders_accepted', 'total_orders_rejected', 'product_count'));
+
+        // count of products
+
+        
+        // return view('admin.store-details', compact('store'));
+    }
 }
