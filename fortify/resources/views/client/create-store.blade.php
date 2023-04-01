@@ -31,11 +31,11 @@
      </div>
     <div>
     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select your city</label>
-        <select id="countries" name="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <select id="countries" name="city_id" class="bg-gray-50 mb-6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <option selected disabled >select a city</option>
-        <option value="MA">Marrakesh</option>
-        <option value="CA">Casablanca</option>
-        <option value="YO">Youssoufia</option>
+        @foreach ($cities as $city)
+            <option value="{{$city->id}}">{{$city->name}}</option>
+        @endforeach
     </select>
     </div>
     <div class="relative z-0 w-full mb-6 group">

@@ -10,8 +10,9 @@ class CategoryController extends Controller
 {
     //
     public function view()
-    {   
-        $categories = Category::all();
+    {
+        // $categories = Category::all();
+        $categories = Category::withCount('products')->get();
         // return view('admin.categories');
         return view('admin.categories', ['categories' => $categories]);
     }
@@ -36,6 +37,7 @@ class CategoryController extends Controller
     public function delete($id)
     {
         $category = Category::find($id);
+        $category->products()->update(['category_id' => null]);
         $category->delete();
         return redirect()->route('admin.categories');
     }

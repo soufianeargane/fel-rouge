@@ -133,7 +133,7 @@
 
         <div class="flex gap-2 flex-wrap">
             @foreach ($products as $product)
-            <div class="mt-4 p-2">
+            <div class="mt-4 p-2 mx-auto sm:mx-0">
         <div class="group relative">
             <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 ">
             <img
@@ -147,7 +147,10 @@
                     {{ $product->name }}
                 </h3>
                 <p class="mt-1 text-sm text-gray-500">
+                    <!-- product category if it exists -->
+                    @if ($product->category)
                     {{ $product->category->name }}
+                    @endif
                 </p>
             </div>
             <p class="text-sm font-medium text-gray-900">

@@ -13,11 +13,10 @@ class Store extends Model
     protected $fillable = [
         'title',
         'phone',
-        'email',
-        'city',
         'neighborhood',
         'image',
         'user_id',
+        'city_id',
     ];
 
     // get the user who owns the store
@@ -30,5 +29,11 @@ class Store extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    // city
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }

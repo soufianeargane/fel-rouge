@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,8 +32,10 @@ class StoreController extends Controller
      */
     public function create()
     {
-        //
-        return view('client.create-store');
+        // get all cities
+        $cities = City::all();
+
+        return view('client.create-store', compact('cities'));
     }
 
     /**
@@ -50,20 +53,21 @@ class StoreController extends Controller
                 'required',
                 'regex:/^(?:\+212|0)[1-9][\d]{8}$/'
             ],
-            'city' => 'required',
+            'city_id' => 'required|numeric',
             'neighborhood' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
         $image = $request->file('image');
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('img/store'), $new_name);
         $form_data = array(
             'title' => $request->title,
             'phone' => $request->phone,
-            'city' => $request->city,
             'neighborhood' => $request->neighborhood,
             'image' => $new_name,
             'user_id' => auth()->user()->id,
+            'city_id' => $request->city_id,
         );
         Store::create($form_data);
         // session flash success
@@ -127,5 +131,13 @@ class StoreController extends Controller
         $products = $store->products;
 
         return view('client.store-details', compact('products', 'store'));
+    }
+
+
+    public function adminStore()
+    {
+        # code...
+        $stores = Store::with('city')->get();
+        return view('admin.stores', compact('stores'));
     }
 }
