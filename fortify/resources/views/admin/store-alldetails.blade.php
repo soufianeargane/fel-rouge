@@ -55,14 +55,15 @@
         <div class="container mx-auto pr-2">
             <div class="w-52 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
             <div class="h-12 bg-red-400 flex items-center justify-between">
-                <p class="mr-0 text-white text-lg pl-5">BT SUBSCRIBERS</p>
+                <p class="mr-0 text-white text-lg pl-5">Owner</p>
             </div>
-            <div class="flex justify-between items-center px-2 text-sm text-gray-600">
-                <p>TOTAL</p> <span class="py-4 text-2xl ml-5">20,456</span>
+            <div class="flex justify-center items-center px-2 text-sm text-gray-600">
+                <span class="py-4 text-2xl ml-5">{{$store->user->name}}</span>
             </div>
             <!-- <hr > -->
             </div>
         </div>
+        
 
       
       

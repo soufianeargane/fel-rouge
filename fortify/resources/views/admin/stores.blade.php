@@ -19,17 +19,27 @@
                         {{$store->title}}
                     </h5>
                     <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
+                        {{$store->neighborhood}},
+                        {{$store->city->name}}
                     </p>
-                    <a href="/admin/store-details/{{$store->id}}">
-                        <button
-                            type="button"
-                            class="px-4 py-2 font-semibold text-white transition-colors duration-200 transform bg-blue-600 rounded-md dark:bg-blue-500 hover:bg-blue-500 dark:hover:bg-blue-400 focus:outline-none focus:bg-blue-500 dark:focus:bg-blue-400"
-                                                    >
-                            Button
-                        </button>
-                    </a>
+                    <div class="flex gap-1">
+                        <a href="/admin/store-details/{{$store->id}}">
+                            <button
+                                type="button"
+                                class="px-4 py-2 font-semibold text-white transition-colors duration-200 transform bg-blue-600 rounded-md dark:bg-blue-500 hover:bg-blue-500 dark:hover:bg-blue-400 focus:outline-none focus:bg-blue-500 dark:focus:bg-blue-400"
+                                                        >
+                                Button
+                            </button>
+                        </a>
+                        <form action="">
+                            <button
+                                type="submit"
+                                class="px-4 py-2 font-semibold text-white transition-colors duration-200 transform bg-red-600 rounded-md dark:bg-red-500 hover:bg-red-500 dark:hover:bg-red-400 focus:outline-none focus:bg-red-500 dark:focus:bg-red-400"
+                                                        >
+                                Delete
+                            </button>
+                        </form>
+                    </div>
                     </div>
                 </div>
                 @endforeach
