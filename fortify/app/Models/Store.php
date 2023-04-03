@@ -17,6 +17,7 @@ class Store extends Model
         'image',
         'user_id',
         'city_id',
+        'deleted_at',
     ];
 
     // get the user who owns the store

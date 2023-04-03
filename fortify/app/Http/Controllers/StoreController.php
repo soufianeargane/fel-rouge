@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\User;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -194,5 +195,26 @@ class StoreController extends Controller
 
         
         // return view('admin.store-details', compact('store'));
+    }
+
+    public function deleteStore(Request $request)
+    {
+        $store = Store::find($request->store_id);
+        if (! $store) {
+            # code...
+            return abort(404, 'store not found');
+        }
+
+        // get user with this store
+        $user = User::find($store->user_id);
+        $user->role = 0;
+        $user->save();
+
+
+        $store->deleted_at = now();
+        $store->status = 2;
+        $store->save();
+
+        return redirect()->back()->with('message', 'store deleted successfully');
     }
 }

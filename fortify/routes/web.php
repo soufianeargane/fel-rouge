@@ -59,6 +59,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // stores route
     Route::get('admin/stores', [StoreController::class, 'adminStore'])->name('admin.stores');
     Route::get('/admin/store-details/{id}', [StoreController::class, 'allDetails']);
+    Route::post('/admin/store/delete', [StoreController::class, 'deleteStore'])->name('admin.stores.delete');
 });
 
 
