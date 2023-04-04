@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use stdClass;
 use Dompdf\Dompdf;
 use App\Models\Order;
 use App\Models\Store;
 use App\Mail\NewOrder;
 use App\Models\Product;
 use App\Mail\OrderAccepted;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
@@ -37,7 +38,7 @@ class OrderController extends Controller
         ]);
 
         // attach products to order
-        foreach ($order as $item){
+        foreach ($order as $item) {
             $product_id = $item['id'];
             // return $product_id;
             $quantity = $item['quantity'];
@@ -67,26 +68,27 @@ class OrderController extends Controller
         ]);
     }
 
-    public function index(){
+    public function index()
+    {
         // get all orders of owner
         $user_id = auth()->user()->id;
         //get store of owner
         $store = Store::where('user_id', $user_id)->first();
         $store_id = $store->id;
         $orders = Order::where('store_id', $store_id)
-                ->with('products', function ($query) {
-                    $query->withPivot('quantity');
-                })
-                ->get();
+            ->with('products', function ($query) {
+                $query->withPivot('quantity');
+            })
+            ->get();
         return view('owner.orders', compact('orders'));
     }
 
     public function show($id)
     {
         $products = Order::findOrFail($id)
-                        ->products()
-                        ->withPivot('quantity')
-                        ->get();
+            ->products()
+            ->withPivot('quantity')
+            ->get();
         return response()->json([
             'status' => 'success',
             'data' => $products // update variable name here
@@ -144,12 +146,12 @@ class OrderController extends Controller
             $store_name = $store->title;
 
             // send email to user
-            Mail::to($user_email)->send(new OrderAccepted($store_name, $order->id, $order->total_price, $user_name ));
+            Mail::to($user_email)->send(new OrderAccepted($store_name, $order->id, $order->total_price, $user_name));
 
             return redirect()->back()->with('success', 'Order accepted');
 
 
-        }else if ($request->status == 2) {
+        } else if ($request->status == 2) {
             // reject order
             $order = Order::find($request->order_id);
             $order->status = 2;
@@ -167,10 +169,58 @@ class OrderController extends Controller
             $order->save();
 
             return redirect()->back()->with('success', 'Order rejected');
-        }
-        else {
+        } else {
             # code...
             return abort(404);
         }
+    }
+
+
+    public function oneOrder($id, $store_id)
+    {
+        # code...
+        $user_id = auth()->user()->id;
+
+        // get all products of store where deleted_at is null
+        $store = Store::where('id', $store_id)->first();
+        $store_id = $store->id;
+        $Products = Product::where('store_id', $store_id)->whereNull('deleted_at')->get();
+
+        // get first order of user and products in order
+        $order = Order::where('id', $id)
+            ->with('products', function ($query) {
+                $query->withPivot('quantity');
+            })
+            ->first();
+
+
+        // return view('client.orders', compact('order'));
+        $orderArr = [];
+        foreach ($order->products as $product) {
+            $obj = new stdClass();
+            $obj->id = $product->id;
+            $obj->name = $product->name;
+            $obj->price = $product->price;
+            $obj->quantity = $product->pivot->quantity;
+            $orderArr[] = $obj;
+        }
+        return view('client.order-edit', [
+            'order' => json_encode($orderArr),
+            'products' => $Products
+        ]);
+    }
+
+    public function userOrders()
+    {
+        # code...
+        $user_id = auth()->user()->id;
+        $orders = Order::where('user_id', $user_id)
+            ->with('products', function ($query) {
+                $query->withPivot('quantity');
+            })
+            ->get();
+        return view('client.orders', compact('orders'));
+
+
     }
 }

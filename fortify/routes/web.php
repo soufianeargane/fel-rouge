@@ -78,12 +78,15 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // orders route
     Route::get('owner/orders', [OrderController::class, 'index'])->name('owner.orders');
     Route::post('owner/orders/action', [OrderController::class, 'action'])->name('owner.orders.action');
-    Route::get('/owner/orders-details/{id}', [OrderController::class, 'show']);
+
+
 
     // to download pdf
     Route::get('/download-pdf', [OrderController::class, 'downloadPdf']);
 });
 
+
+Route::get('/owner/orders-details/{id}', [OrderController::class, 'show'])->middleware(['auth']);
 
 
 // user route
@@ -93,4 +96,6 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::resource('store', App\Http\Controllers\StoreController::class);
     Route::get('store/{id}/details', [StoreController::class, 'details'])->name('store.details');
     Route::post('store/orders', [OrderController::class, 'store'])->name('order.store');
+    Route::get('orders', [OrderController::class, 'userOrders'])->name('user.orders');
+    Route::get('/owner/orders/{id}/edit/{store_id}', [OrderController::class, 'oneOrder'])->name('owner.orders.edit');
 });

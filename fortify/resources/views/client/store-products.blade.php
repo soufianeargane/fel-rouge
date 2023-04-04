@@ -33,6 +33,7 @@
         </div>
     </div>
 </x-store>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <script>
     var order = [];
     var total;
@@ -163,6 +164,17 @@
             },
             success: function(response) {
                 console.log(response);
+                // clear the order
+                order = [];
+                // update the UI to reflect the new order
+                updateOrderUI();
+                Swal.fire({
+    icon: 'success',
+    title: 'Order has been made successfully',
+    text: 'You will be redirected to the orders page',
+  confirmButtonText: "okay",
+  showCancelButton: false,
+  });
             }
         });
     });
