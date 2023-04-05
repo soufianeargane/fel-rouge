@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use stdClass;
+use Throwable;
 use Dompdf\Dompdf;
 use App\Models\Order;
 use App\Models\Store;
 use App\Mail\NewOrder;
 use App\Models\Product;
-use App\Mail\OrderAccepted;
 
+use App\Mail\OrderAccepted;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
@@ -229,7 +231,45 @@ class OrderController extends Controller
     public function updateOrder(Request $request, $id)
     {
         # code...
-        return "hello". $id;
+        $order = Order::findOrFail($id);
+        $order_data = $request->order;
+        $total_price = 0;
+        try {
+            //code...
+            // update order total price
+            $products = $order->products;
+            foreach ($products as $product) {
+                # code...
+                $product_id = $product->id;
+                $quantity = $product->pivot->quantity;
+                // update quantity of product
+                $product = Product::find($product_id);
+                // return $product;
+                $product->quantity += $quantity;
+                $product->save();
+            }
+            $order->products()->detach();
+
+            // attach the new products to the order
+            foreach ($order_data as $product_data) {
+
+                $product = Product::findOrFail($product_data['id']);
+                $quantity = $product_data['quantity'];
+                // update the product quantity
+                $product->quantity -= $quantity;
+                $product->save();
+                // attach the product to the order
+                $order->products()->attach($product->id, ['quantity' => $quantity]);
+
+                // update the total price of the order
+                $total_price += $product->price * $quantity;
+            }
+            $order->total_price = $total_price;
+            return response()->json(['message' => 'Order updated successfully'], 200);
+        } catch (Throwable $th) {
+
+            return response()->json(['message' => 'Failed to update order'], 500);
+        }
     }
 }
 
