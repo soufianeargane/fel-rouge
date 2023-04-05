@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
         // categpru seeder
         $this->call([
             CategorySeeder::class,
+            CitySeeder::class,
+            UserSeeder::class,
+            StoreSeeder::class,
         ]);
     }
 }

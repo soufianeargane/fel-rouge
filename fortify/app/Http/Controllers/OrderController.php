@@ -202,11 +202,13 @@ class OrderController extends Controller
             $obj->name = $product->name;
             $obj->price = $product->price;
             $obj->quantity = $product->pivot->quantity;
+            $obj->original_qty = $product->pivot->quantity;
             $orderArr[] = $obj;
         }
         return view('client.order-edit', [
             'order' => json_encode($orderArr),
-            'products' => $Products
+            'products' => $Products,
+            'order_id' => $id,
         ]);
     }
 
@@ -223,4 +225,12 @@ class OrderController extends Controller
 
 
     }
+
+    public function updateOrder(Request $request, $id)
+    {
+        # code...
+        return "hello". $id;
+    }
 }
+
+

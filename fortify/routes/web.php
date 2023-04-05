@@ -98,4 +98,5 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('store/orders', [OrderController::class, 'store'])->name('order.store');
     Route::get('orders', [OrderController::class, 'userOrders'])->name('user.orders');
     Route::get('/owner/orders/{id}/edit/{store_id}', [OrderController::class, 'oneOrder'])->name('owner.orders.edit');
+    Route::post('/orders/update/{id}', [OrderController::class, 'updateOrder'])->name('orders.update');
 });
