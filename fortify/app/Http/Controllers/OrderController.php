@@ -265,11 +265,32 @@ class OrderController extends Controller
                 $total_price += $product->price * $quantity;
             }
             $order->total_price = $total_price;
+            $order->save();
             return response()->json(['message' => 'Order updated successfully'], 200);
         } catch (Throwable $th) {
 
             return response()->json(['message' => 'Failed to update order'], 500);
         }
+    }
+
+    public function deleteOrder($id)
+    {
+        # code...
+        $order = Order::findOrFail($id);
+        $products = $order->products;
+        foreach ($products as $product) {
+            # code...
+            $product_id = $product->id;
+            $quantity = $product->pivot->quantity;
+            // update quantity of product
+            $product = Product::find($product_id);
+            $product->quantity += $quantity;
+            $product->save();
+        }
+        // detach all products from order
+        $order->products()->detach();
+        $order->delete();
+        return redirect()->route('user.orders')->with('success', 'Order deleted successfully');
     }
 }
 

@@ -57,12 +57,9 @@
                                     >
                                         <button class="px-2 py-1 bg-green-300 rounded">Edit</button>
                                     </a>
-                                    <form action="{{route('owner.orders.action')}}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="status" value="2">
-                                        <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                        <button type="submit" class="px-2 py-1 bg-red-300 rounded">Cancel</button>
-                                    </form>
+                                        <a href="/client/orders/delete/{{$order->id}}"
+                                        >
+                                        <button type="" class="px-2 py-1 bg-red-300 rounded">Cancel</button></a>
                                 @endif
                             </div>
                         </td>
