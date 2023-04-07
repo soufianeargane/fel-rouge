@@ -262,6 +262,19 @@
             });
         });
 
+
+        // ajax call to get comments and ratings
+        $(document).ready(function() {
+            var store_id = $('#store_id').val();
+            $.ajax({
+                url: '/client/store/rating/details/' + store_id,
+                type: 'GET',
+                success: function(data) {
+                    console.log(data);
+                    return;
+                }
+                });
+        });
     </script>
 
 </x-store>

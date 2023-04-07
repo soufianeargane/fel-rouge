@@ -51,4 +51,29 @@ class RatingController extends Controller
         // Insert the rating and comment into the database using the Laravel Rateable package
 
     }
+
+
+    public function showRating($storeId)
+    {
+        // return $storeId;
+        $store = Store::with('ratings.user')->findOrFail($storeId);
+        // return $store->ratings;
+        $averageRating = $store->averageRating;
+
+        $latestComments = $store->ratings()->with('user')->orderByDesc('created_at')->take(3)->get();
+        $latestCommentsData = [];
+
+        foreach ($latestComments as $comment) {
+            $latestCommentsData[] = [
+                'comment' => $comment->comment,
+                'user_name' => $comment->user->name,
+            ];
+        }
+        // $averageRating without the decimal point
+        $averageRating = (int) $averageRating;
+        return response()->json([
+            'average_rating' => $averageRating,
+            'latest_comments' => $latestCommentsData,
+        ]);
+    }
 }
