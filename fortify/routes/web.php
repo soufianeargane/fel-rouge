@@ -7,9 +7,11 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RedirectController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -100,4 +102,5 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/owner/orders/{id}/edit/{store_id}', [OrderController::class, 'oneOrder'])->name('owner.orders.edit');
     Route::post('/orders/update/{id}', [OrderController::class, 'updateOrder'])->name('orders.update');
     Route::get('/client/orders/delete/{id}', [OrderController::class, 'deleteOrder'])->name('orders.delete');
+    ROute::post('/client/store/rating', [RatingController::class, 'storeRating'])->name('store.rating');
 });

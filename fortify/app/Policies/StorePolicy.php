@@ -91,4 +91,11 @@ class StorePolicy
     {
         //
     }
+
+    public function rate(User $user, Store $store)
+    {
+        // Check if the user has made at least one order from the store
+        $order = $user->orders()->where('store_id', $store->id)->first();
+        return !is_null($order);
+    }
 }

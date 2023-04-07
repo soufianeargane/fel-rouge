@@ -1,4 +1,18 @@
 <x-store>
+    <style>
+        .star-rating i {
+        color: #ddd;
+        font-size: 18px;
+        cursor: pointer;
+        }
+
+        .star-rating i.active,
+        .star-rating i:hover {
+        color: #f1c40f;
+        /* background-color: #f1c40f; */
+}
+
+    </style>
     <div class="container mx-auto">
         <div class="flex">
             <div class="w-2/3">
@@ -12,7 +26,7 @@
                                 {{ $store->title }}
                             </h1>
                             <div class="flex mb-4">
-                            <span class="flex items-center">
+                            {{-- <span class="flex items-center">
                                 <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                                 </svg>
@@ -25,11 +39,18 @@
                                 <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                                 </svg>
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+                                <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                                 </svg>
                                 <span class="text-gray-600 ml-3">4 Reviews</span>
-                            </span>
+                            </span> --}}
+                            <div class="star-rating">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
                             <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
                                 <a class="text-gray-500">
                                 <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
@@ -72,7 +93,7 @@
                             <div class="flex justify-between items-center mb-6">
                                 <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Leave a comment</h2>
                             </div>
-                            <form class="mb-2">
+                            <form method="post" action="" class="mb-2">
                                 <div class="py-2 px-1 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                                     <label for="comment" class="sr-only">Your comment</label>
                                     <input
@@ -80,7 +101,19 @@
                                         class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
                                         placeholder="Write a comment..." />
                                 </div>
-                                <button type="submit"
+                                <div class="star-rating">
+                                    <i class="fa-solid fa-star" data-value="1"></i>
+                                    <i class="fa-solid fa-star" data-value="2"></i>
+                                    <i class="fa-solid fa-star" data-value="3"></i>
+                                    <i class="fa-solid fa-star" data-value="4"></i>
+                                    <i class="fa-solid fa-star" data-value="5"></i>
+                                </div>
+                                <input type="hidden" 
+                                name="rating" id="rating">
+                                <input type="hidden" id="store_id"
+                                name="store_id" value="{{ $store->id }}"
+                                >
+                                <button type="button" id="submit_rating"
                                     class="px-2 py-1 bg-blue-500 rounded-lg text-white">
                                     Share
                                 </button>
@@ -183,8 +216,53 @@
             });
         });
 
+        $(document).ready(function() {
+            $('.star-rating i').click(function() {
+                var rating = $(this).data('value');
+                $('#rating').val(rating);
+                console.log(rating);
+                $(this).addClass('active');
+                $(this).prevAll().addClass('active');
+                $(this).nextAll().removeClass('active');
+            });
+        });
 
+        $(document).ready(function() {
+            $('#submit_rating').click(function() {
+                var rating = $('#rating').val();
+                var store_id = $('#store_id').val();
+                var comment = $('#comment').val();
+                // validation
+                if (rating == '') {
+                    alert('Please select rating');
+                    return false;
+                }
+                if (comment == '') {
+                    alert('Please enter comment');
+                    return false;
+                }
+                console.log(rating);
+                console.log(store_id);
+                console.log(comment);
+                $.ajax({
+                    url: '/client/store/rating',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    data: {
+                        rating: rating,
+                        store_id: store_id,
+                        comment: comment,
+                    },
+                    success: function(data) {
+                        console.log(data);
+                    }
+                });
+            });
+        });
 
     </script>
 
 </x-store>
+<script src="https://kit.fontawesome.com/1c3b083d98.js" crossorigin="anonymous"></script>

@@ -4,12 +4,14 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Product;
+use willvincent\Rateable\Rateable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Store extends Model
 {
     use HasFactory;
+    use Rateable;
     protected $fillable = [
         'title',
         'phone',
