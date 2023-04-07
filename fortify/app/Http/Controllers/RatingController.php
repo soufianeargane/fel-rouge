@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Store;
 use Illuminate\Http\Request;
+// use User model
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-// use User model
-use App\Models\User;
 
 class RatingController extends Controller
 {
@@ -30,7 +31,22 @@ class RatingController extends Controller
             return response()->json(['message' => 'You need to make an order from this store to rate it']);
         }
 
-        return 'yess';
+        $store = $store = Store::findOrFail($store_id);
+        if(!$store) {
+            return response()->json(['message' => 'Store not found']);
+        }
+        // $store->rate($request->rating, $user, [
+        //     'comment' => $request->comment,
+        // ]);
+        $store->rate($request->rating, $request->comment);
+
+        // return response()->json(['message' => 'Rating submitted successfully']);
+        // retturn all ratings for the store
+        return response()->json([
+            'message' => 'Rating submitted successfully',
+            'all ratings' => $store->ratings
+        ]);
+
 
         // Insert the rating and comment into the database using the Laravel Rateable package
 
