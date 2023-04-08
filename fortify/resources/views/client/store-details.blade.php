@@ -114,28 +114,21 @@
                                 name="store_id" value="{{ $store->id }}"
                                 >
                                 <button type="button" id="submit_rating"
-                                    class="px-2 py-1 bg-blue-500 rounded-lg text-white">
+                                    class="px-2 py-1 bg-blue-500 rounded-lg text-white disabled:bg-blue-600 ">
+                                    <div id="loading"
+                                        class="inline-block h-4 w-4 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                                        role="status"
+                                        style="display:none">
+                                        <span
+                                            class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                                            >Loading...</span
+                                        >
+                                    </div>
                                     Share
                                 </button>
                             </form>
-                            <div>
-                            <article class="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
-        <footer class="flex justify-between items-center mb-2">
-            <div class="flex items-center">
-                <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
-                        class="mr-2 w-6 h-6 rounded-full"
-                        src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                        alt="Michael Gough">Michael Gough</p>
-                <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
-                        title="February 8th, 2022">Feb. 8, 2022</time></p>
-            </div>
-
-            <!-- Dropdown menu -->
-
-        </footer>
-        <p class="text-gray-500 dark:text-gray-400">Very straight-to-point article. Really worth time reading. Thank you! But tools are just the
-            instruments for the UX designers.</p>
-    </article>
+                            <div id="comments">
+                            
                             </div>
 
                         </div>
@@ -241,9 +234,10 @@
                     alert('Please enter comment');
                     return false;
                 }
-                console.log(rating);
-                console.log(store_id);
-                console.log(comment);
+                // disable button
+                $('#submit_rating').attr('disabled', true);
+                $('#loading').show();
+                // ajax call
                 $.ajax({
                     url: '/client/store/rating',
                     headers: {
@@ -257,6 +251,9 @@
                     },
                     success: function(data) {
                         console.log(data);
+                        $('#loading').hide();
+                        $('#submit_rating').attr('disabled', false);
+                        getComments();
                     }
                 });
             });
@@ -264,17 +261,64 @@
 
 
         // ajax call to get comments and ratings
-        $(document).ready(function() {
+
+        function getComments() {
+            $(document).ready(function() {
             var store_id = $('#store_id').val();
             $.ajax({
                 url: '/client/store/rating/details/' + store_id,
                 type: 'GET',
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
+                    updateStarColors(data);
                     return;
                 }
                 });
-        });
+            }); 
+        }
+        getComments();
+        function updateStarColors(data) {
+            console.log(data);
+            const rating = data.average_rating;
+            const stars = $('.star-rating i');
+            stars.removeClass('active');
+            
+            for (let i = 0; i < rating; i++) {
+                stars.eq(i).addClass('active');
+            }
+
+            const commentsDiv = $('#comments');
+            let comments = data.latest_comments;
+            commentsDiv.empty();
+
+            comments.forEach(comment => {
+                const commentHtml = `
+                <article class="p-2 mb-1 text-base bg-white rounded-lg dark:bg-gray-900">
+                                <footer class="flex justify-between items-center mb-2">
+                                    <div class="flex items-center">
+                                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
+                                                class="mr-2 w-6 h-6 rounded-full"
+                                                src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                                                alt="Michael Gough">
+                                            <span class="font-semibold">${comment.user_name}</span>
+                                                </p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
+                                                title="February 8th, 2022">
+                                                ${comment.created_at}
+                                                </time></p>
+                                    </div>
+
+                                    <!-- Dropdown menu -->
+
+                                </footer>
+                                <p class="text-gray-500 dark:text-gray-400">
+                                    ${comment.comment}
+                                .</p>
+                            </article>`;
+                commentsDiv.append(commentHtml);
+            });
+
+        }
     </script>
 
 </x-store>

@@ -66,6 +66,7 @@ class RatingController extends Controller
         foreach ($latestComments as $comment) {
             $latestCommentsData[] = [
                 'comment' => $comment->comment,
+                'created_at' => $comment->created_at->diffForHumans(),
                 'user_name' => $comment->user->name,
             ];
         }
