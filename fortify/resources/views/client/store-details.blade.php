@@ -194,7 +194,7 @@
   </div>
 </div>
     </div>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 
     <script>
@@ -251,6 +251,19 @@
                     },
                     success: function(data) {
                         console.log(data);
+                        // clear form
+                        $('#comment').val('');
+                        $('#rating').val('');
+                        // if data has message property
+                        if (data.message) {
+                            // sweet alert
+                            Swal.fire({
+                                title: 'Error!',
+                                text: data.message,
+                                icon: 'error',
+                                confirmButtonText: 'Ok'
+                            });
+                        }
                         $('#loading').hide();
                         $('#submit_rating').attr('disabled', false);
                         getComments();
