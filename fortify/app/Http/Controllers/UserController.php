@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Store;
-use Illuminate\Http\Request;
 use Termwind\Components\Dd;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -13,7 +14,8 @@ class UserController extends Controller
     {
         $accepted_stores = Store::where('status', '1')->get();
         // dd($accepted_stores);
-        return view('client.store', compact('accepted_stores'));
+        $cities = City::all();
+        return view('client.store', compact('accepted_stores', 'cities'));
     }
 
     

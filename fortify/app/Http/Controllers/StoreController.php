@@ -22,8 +22,11 @@ class StoreController extends Controller
     {
         //
         $accepted_stores = Store::where('status', '1')->get();
-        // dd($accepted_stores);
-        return view('client.store', compact('accepted_stores'));
+        return response()->json([
+            'stores' => $accepted_stores,
+        ]);
+        // // dd($accepted_stores);
+        // return view('client.store', compact('accepted_stores'));
     }
 
     /**
@@ -211,10 +214,17 @@ class StoreController extends Controller
         $user->save();
 
 
-        $store->deleted_at = now();
+        
         $store->status = 2;
         $store->save();
 
         return redirect()->back()->with('message', 'store deleted successfully');
+    }
+
+    public function filterStores($id){
+        $stores = Store::where('city_id', $id)->get();
+        return response()->json([
+            'stores' => $stores,
+        ]);
     }
 }

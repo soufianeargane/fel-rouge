@@ -104,4 +104,5 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/client/orders/delete/{id}', [OrderController::class, 'deleteOrder'])->name('orders.delete');
     ROute::post('/client/store/rating', [RatingController::class, 'storeRating'])->name('store.rating');
     Route::get('/client/store/rating/details/{storeId}', [RatingController::class, 'showRating'])->name('store.rating.show');
+    Route::get('/store/city/{id}', [StoreController::class, 'filterStores'])->name('store.city');
 });
