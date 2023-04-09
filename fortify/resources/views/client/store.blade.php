@@ -21,6 +21,36 @@
             border-radius: 50%;
             animation: spin 0.6s linear infinite;
         }
+
+        @keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .show--js{
+                display: none;
+            }
+        }
+        @media (min-width: 768px) {
+            .media__{
+                display: block;
+                position: relative;
+            }
+        }
+
+        .media__{
+            display: block ;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 999;
+            transition: all 0.3s ease-in-out;
+        }
+
         
 
     </style>
@@ -29,10 +59,11 @@
         <div class="spinner"></div>
     </div>
     <div class="flex">
-        <div style="min-height: 100vh" class=" sidebar relative w-60 p-4 bg-red-800">
-            <button id="toggleSidebarMobile" class="fixed bottom-4 right-4 z-50 bg-red-800 text-white p-2 rounded-full shadow-md">
-                <i class="bi bi-layout-text-sidebar-reverse"></i>
-            </button>
+        <button id="toggleSidebarMobile" class="fixed bottom-4 right-4 z-50 bg-red-800 text-white p-2 rounded-full shadow-md block md:hidden">
+            <i class="bi bi-layout-text-sidebar-reverse"></i>
+        </button>
+        <div style="min-height: 100vh" class=" sidebar show--js  relative w-60 p-4 bg-red-800">
+            
             <div class="content--js">
                 <a href="{{route('store.create')}}">
                     <button class="bg-red-300 rounded p-2">apply to have a store</button>
@@ -56,7 +87,7 @@
         </div>
         
         
-        <div style class="bg-gray-100 py-2 px-4 w-content  make-w-full">
+        <div style class="bg-gray-100 py-2 px-4 make-w-full w-full">
             <h3>Stores</h3>
             {{-- cards tailwind --}}
             <div id="stores" class="flex flex-wrap gap-4">
@@ -167,6 +198,16 @@
                 }
             });
         });
+    });
+
+    $(document).ready(function() {
+        const toggleBtn = $('#toggleSidebarMobile');
+        toggleBtn.click(function() {
+            const sidebar = $('.sidebar');
+            sidebar.toggleClass('media__');
+        });
+
+        
     });
 
     // style="background-size: cover; background-position: center; background-image: url('img/store/${store.image}'); height: 250px; width: 100%; background-repeat: no-repeat;"
