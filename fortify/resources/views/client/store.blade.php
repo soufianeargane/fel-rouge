@@ -4,9 +4,9 @@
             width: 3.75rem; /* Adjust this value according to your desired collapsed sidebar width */
             overflow-x: hidden;
         }
-        .sidebar-collapsed #toggleSidebar {
-            right: -2rem; /* Adjust this value according to your desired collapsed sidebar width */
-        }
+        /* .sidebar-collapsed #toggleSidebar {
+            right: -2rem; 
+        } */
         .hidden {
             display: none;
         }
@@ -37,6 +37,10 @@
             transform: rotate(360deg);
             }
         }
+
+        .w-content{
+            width: calc(100% - 15rem);
+        }
     </style>
 
     <div id="loader" class="loader hidden">
@@ -44,28 +48,30 @@
     </div>
     <div class="flex">
         <div style="min-height: 100vh" class=" sidebar relative w-60 p-4 bg-red-800">
-        <button id="toggleSidebar" class="absolute top-0 right-0 m-4">
-            <i class="bi bi-layout-text-sidebar-reverse"></i>
-        </button>
-            <a href="{{route('store.create')}}">
-                <button class="bg-red-300 rounded p-2">apply to have a store</button>
-            </a>
-            <div class="mt-2">
-                <select class="city_input" id="select-beast" placeholder="Select a city..." autocomplete="off">
-                    <option selected disabled value="">Select a city...</option>
-                    @foreach ($cities as $city)
-                        <option value="{{$city->id}}">{{$city->name}}</option>
-                    @endforeach
-                </select>
+            <button id="toggleSidebar" class="absolute top-0 right-0 m-4">
+                <i class="bi bi-layout-text-sidebar-reverse"></i>
+            </button>
+            <div class="content--js">
+                <a href="{{route('store.create')}}">
+                    <button class="bg-red-300 rounded p-2">apply to have a store</button>
+                </a>
+                <div class="mt-2">
+                    <select class="city_input" id="select-beast" placeholder="Select a city..." autocomplete="off">
+                        <option selected disabled value="">Select a city...</option>
+                        @foreach ($cities as $city)
+                            <option value="{{$city->id}}">{{$city->name}}</option>
+                        @endforeach
+                    </select>
 
-                <button
-                class="bg-red-300 rounded p-1 mt-2 search-btn"
-                >
-                    search
-                </button>
+                    <button
+                    class="bg-red-300 rounded p-1 mt-2 search-btn"
+                    >
+                        search
+                    </button>
+                </div>
             </div>
         </div>
-        <div style="width: calc(100% - 15rem)" class="bg-gray-100 py-2 px-4">
+        <div style class="bg-gray-100 py-2 px-4 w-content make-w-full">
             <h3>Stores</h3>
             {{-- cards tailwind --}}
             <div id="stores" class="flex flex-wrap gap-4">
@@ -183,8 +189,12 @@
     $(document).ready(function() {
         $('#toggleSidebar').on('click', function() {
             const sidebar = $('div.sidebar');
-            console.log('clicked');
+            const sidebar_content = $('.content--js');
+            const storesDiv = $('.make-w-full');
             sidebar.toggleClass('sidebar-collapsed');
+            sidebar_content.toggleClass('hidden');
+            storesDiv.toggleClass('w-full');
+            storesDiv.toggleClass('w-content');
         });
     });
     // style="background-size: cover; background-position: center; background-image: url('img/store/${store.image}'); height: 250px; width: 100%; background-repeat: no-repeat;"
