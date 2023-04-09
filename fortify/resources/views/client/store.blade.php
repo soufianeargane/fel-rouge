@@ -180,6 +180,8 @@
             console.log(city);
             if (!city) {
                 getAllStores();
+                const sidebar = $('.sidebar');
+                sidebar.removeClass('media__');
                 return;
             }
             loader.removeClass('hidden'); // Show the loader
@@ -189,6 +191,8 @@
                 dataType: "json",
                 success: function(response) {
                     // console.log(response);
+                    const sidebar = $('.sidebar');
+                sidebar.removeClass('media__');
                     loader.addClass('hidden'); // Hide the loader
                     displayStores(response);
                 },
