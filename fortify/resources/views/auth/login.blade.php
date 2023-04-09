@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <link rel="stylesheet" href="{{asset('css/home.css')}}">
+    
     <title>Login</title>
     <style>
         .bg__,
@@ -51,7 +53,7 @@
         @endif
         <br><input class="shadow bg__ hover:bg-orange-900 focus:shadow-outline focus:outline-none text-dark font-bold py-2 px-4 rounded" type="submit" value="Login">
     </form>
-
+    <script src="{{asset('js/home.js')}}"></script>
 </body>
 
 </html>

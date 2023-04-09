@@ -1,12 +1,47 @@
 <!-- hide login and register if user is logged in -->
 
+<nav>
+    <div class=" container">
+        <div class="nav__app">
+            <div class="f__logo">
+                <div class="logo">
+                    <img src="./assets/img/index-logo.png" alt="">
+                </div>
+                <p>My Time</p>
+            </div>
+            <div class="ul__app">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                @if(! Auth::check())
+                <a href="{{url('/login')}}">
+                    <button>Login</button>
+                </a>
+                @endif
+            </div>
+            <div id="show-navbar" class="icon__nav">
+                <i class="bi bi-list"></i>
+            </div>
+        </div>
+        <div id="navbar" class="ul__phone navv">
+            <ul class="navv">
+                <li class="navv"><a class="navv" href="#">Home</a></li>
+                <li class="navv"><a class="navv" href="#">About</a></li>
+                <li class="navv"><a class="navv" href="#">Services</a></li>
+                <li class="navv"><a class="navv" href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 
 
 
 
-
-<div class="antialiased bg-gray-100 dark-mode:bg-gray-900">
+{{-- <div class="antialiased bg-gray-100 dark-mode:bg-gray-900">
     <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
         <div x-data="{ open: false }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
             <div class="flex flex-row items-center justify-between p-4">
@@ -40,5 +75,5 @@
             </nav>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- <a href="{{url('/')}}">Home</a>. -->
