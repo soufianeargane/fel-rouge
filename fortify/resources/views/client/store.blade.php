@@ -1,38 +1,5 @@
 <x-store>
     <style>
-        .sidebar-collapsed {
-            width: 3.75rem; /* Adjust this value according to your desired collapsed sidebar width */
-            overflow-x: hidden;
-        }
-        .sidebar {
-            transition: width 0.5s; /* Add this line to create a smooth transition */
-        }
-        .w-content {
-            width: calc(100% - 15rem);
-        }
-
-        /* Update the media query for small devices */
-        @media (max-width: 640px) {
-            .sidebar {
-                width: 100%;
-                position: fixed;
-                z-index: 9999;
-            }
-            .sidebar.sidebar-collapsed {
-                left: -100%;
-            }
-
-            /* Show the mobile toggle button when needed */
-            #toggleSidebarMobile {
-                display: block;
-            }
-            .make-w-full{
-                width: 100%
-            }
-        }
-        .hidden {
-            display: none;
-        }
         .loader {
             position: fixed;
             top: 0;
@@ -41,6 +8,18 @@
             bottom: 0;
             background-color: rgba(255, 255, 255, 0.8);
             z-index: 9999;
+        }
+        .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            margin: -25px 0 0 -25px;
+            border: 5px solid #ccc;
+            border-top-color: #333;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
         }
         
 
@@ -51,7 +30,7 @@
     </div>
     <div class="flex">
         <div style="min-height: 100vh" class=" sidebar relative w-60 p-4 bg-red-800">
-            <button id="toggleSidebarMobile" class="fixed bottom-4 right-4 z-50 bg-red-800 text-white p-2 rounded-full shadow-md hidden">
+            <button id="toggleSidebarMobile" class="fixed bottom-4 right-4 z-50 bg-red-800 text-white p-2 rounded-full shadow-md">
                 <i class="bi bi-layout-text-sidebar-reverse"></i>
             </button>
             <div class="content--js">
@@ -187,37 +166,6 @@
                     console.error('Error fetching data');
                 }
             });
-        });
-    });
-
-
-
-    $(document).ready(function() {
-        const isMobile = window.matchMedia('(max-width: 640px)').matches;
-        const sidebar = $('div.sidebar');
-        const sidebar_content = $('.content--js');
-        const storesDiv = $('.make-w-full');
-
-        if (isMobile) {
-            sidebar.addClass('sidebar-collapsed');
-            $('#toggleSidebarMobile').removeClass('hidden');
-        }
-
-        $('#toggleSidebar').on('click', function() {
-            if (!isMobile) {
-                sidebar.toggleClass('sidebar-collapsed');
-                sidebar_content.toggleClass('hidden');
-                storesDiv.toggleClass('w-full');
-                // storesDiv.toggleClass('w-content');
-            }else{
-                sidebar.toggleClass('sidebar-collapsed');
-            }
-        });
-
-        $('#toggleSidebarMobile').on('click', function() {
-            if (isMobile) {
-                sidebar.toggleClass('sidebar-collapsed');
-            }
         });
     });
 
