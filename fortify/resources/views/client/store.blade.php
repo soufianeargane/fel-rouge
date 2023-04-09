@@ -1,5 +1,12 @@
 <x-store>
     <style>
+        .sidebar-collapsed {
+            width: 3.75rem; /* Adjust this value according to your desired collapsed sidebar width */
+            overflow-x: hidden;
+        }
+        .sidebar-collapsed #toggleSidebar {
+            right: -2rem; /* Adjust this value according to your desired collapsed sidebar width */
+        }
         .hidden {
             display: none;
         }
@@ -31,11 +38,15 @@
             }
         }
     </style>
+
     <div id="loader" class="loader hidden">
         <div class="spinner"></div>
     </div>
     <div class="flex">
-        <div style="min-height: 100vh" class="w-60 p-4 bg-red-800">
+        <div style="min-height: 100vh" class=" sidebar relative w-60 p-4 bg-red-800">
+        <button id="toggleSidebar" class="absolute top-0 right-0 m-4">
+            <i class="bi bi-layout-text-sidebar-reverse"></i>
+        </button>
             <a href="{{route('store.create')}}">
                 <button class="bg-red-300 rounded p-2">apply to have a store</button>
             </a>
@@ -167,5 +178,14 @@
         });
     });
 
+
+
+    $(document).ready(function() {
+        $('#toggleSidebar').on('click', function() {
+            const sidebar = $('div.sidebar');
+            console.log('clicked');
+            sidebar.toggleClass('sidebar-collapsed');
+        });
+    });
     // style="background-size: cover; background-position: center; background-image: url('img/store/${store.image}'); height: 250px; width: 100%; background-repeat: no-repeat;"
 </script>
