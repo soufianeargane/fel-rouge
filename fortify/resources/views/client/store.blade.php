@@ -43,12 +43,12 @@
                 <select class="city_input" id="select-beast" placeholder="Select a city..." autocomplete="off">
                     <option selected disabled value="">Select a city...</option>
                     @foreach ($cities as $city)
-                        <option value="{{$city->id}}">{{$city->name}}</option>  
+                        <option value="{{$city->id}}">{{$city->name}}</option>
                     @endforeach
                 </select>
 
                 <button
-                class="bg-red-300 rounded p-1 mt-2 search-btn" 
+                class="bg-red-300 rounded p-1 mt-2 search-btn"
                 >
                     search
                 </button>
@@ -58,7 +58,7 @@
             <h3>Stores</h3>
             {{-- cards tailwind --}}
             <div id="stores" class="flex flex-wrap gap-4">
-                
+
             </div>
         </div>
     </div>
@@ -79,26 +79,32 @@
             direction: "asc"
         }
     });
-    $(document).ready(function() {
-        const loader = $('#loader');
 
-        // Trigger the AJAX request (e.g., on a button click, page load, or any other event)
-        loader.removeClass('hidden'); // Show the loader
-        $.ajax({
-            type: "GET",
-            url: "{{route('store.index')}}",
-            dataType: "json",
-            success: function(response) {
-                // console.log(response);
-                loader.addClass('hidden'); // Hide the loader
-                displayStores(response);
-            },
-            error: function() {
-                loader.addClass('hidden'); // Hide the loader
-                console.error('Error fetching data');
-            }
+    function getAllStores(){
+        $(document).ready(function() {
+            const loader = $('#loader');
+
+            // Trigger the AJAX request (e.g., on a button click, page load, or any other event)
+            loader.removeClass('hidden'); // Show the loader
+            $.ajax({
+                type: "GET",
+                url: "{{route('store.index')}}",
+                dataType: "json",
+                success: function(response) {
+                    // console.log(response);
+                    loader.addClass('hidden'); // Hide the loader
+                    displayStores(response);
+                },
+                error: function() {
+                    loader.addClass('hidden'); // Hide the loader
+                    console.error('Error fetching data');
+                }
+            });
         });
-    });
+    }
+
+    getAllStores();
+
 
     function displayStores(data) {
         const stores = data.stores;
@@ -140,7 +146,8 @@
             const city = $('.city_input').val();
             console.log(city);
             if (!city) {
-                alert('Please select a city');
+                getAllStores();
+                return;
             }
             loader.removeClass('hidden'); // Show the loader
             $.ajax({
