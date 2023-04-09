@@ -210,5 +210,27 @@
         
     });
 
+    $(document).ready(function() {
+    // Define the media query
+        const mediaQuery = window.matchMedia("(max-width: 767px)");
+
+        // Run the function once on page load
+        checkScreenSize(mediaQuery);
+
+        // Add an event listener to listen for changes in screen size
+        mediaQuery.addListener(checkScreenSize);
+
+        function checkScreenSize(e) {
+            if (e.matches) {
+                console.log('mobile');
+            } else {
+                //remove the class
+                const sidebar = $('.sidebar');
+                sidebar.removeClass('media__');
+                console.log('desktop');
+            }
+        }
+    });
+
     // style="background-size: cover; background-position: center; background-image: url('img/store/${store.image}'); height: 250px; width: 100%; background-repeat: no-repeat;"
 </script>
