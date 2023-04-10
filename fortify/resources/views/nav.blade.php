@@ -1,13 +1,15 @@
 <!-- hide login and register if user is logged in -->
 
 <nav>
-    <div class=" container">
+    <div class=" mx-auto container ">
         <div class="nav__app">
             <div class="f__logo">
+                <a class="flex justify-center items-center" href="/">
                 <div class="logo">
                     <img src="./assets/img/index-logo.png" alt="">
                 </div>
                 <p>My Time</p>
+                </a>
             </div>
             <div class="ul__app">
                 <ul>
@@ -16,10 +18,10 @@
                     <li><a href="#">Services</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
-                @if(! Auth::check())
-                <a href="{{url('/login')}}">
-                    <button>Login</button>
-                </a>
+                @if(! Auth::check() && Request::route()->getName() != 'login')
+                    <a href="{{url('/login')}}">
+                        <button>Login</button>
+                    </a>
                 @endif
             </div>
             <div id="show-navbar" class="icon__nav">
