@@ -48,7 +48,7 @@
             color: #fff !important;
         }
         .btn__:hover{
-            background-color: #8cd795 !important;
+            background-color: #549450 !important;
             cursor: pointer;
             color: black !important;
         }
@@ -84,6 +84,12 @@
         <div class="w-full md:w-1/2 grid place-items-center ">
             <div class="w-full p-2">
             <form class=" sss rounded  p-4 bg-white " action="" method="post">
+                <div class="p-2">
+                    <h1 class="text-2xl font-bold p-2">Login</h1>
+                    <p> Don't have an account?
+                        <a href="{{route('register')}}" class="text-blue-500">Register</a>
+                    </p>
+                </div>
                 @csrf
                 <div class="mb-4">
                     <input class="w-full outline-none  appearance-none block  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" value="{{old('email')}}" type="email" name="email" id="email" placeholder="Email">
@@ -108,7 +114,7 @@
                 </div>
                 <div class="flex justify-center mt-3">
                     @if (Route::has('password.request'))
-                    <a class="inline-block mx-auto align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="{{ route('password.request') }}">
+                    <a style="color: #37474f" class="inline-block mx-auto align-baseline font-bold text-sm hover:text-blue-800" href="{{ route('password.request') }}">
                         {{ __('Forgot Your Password?') }}
                     </a>
                 @endif
