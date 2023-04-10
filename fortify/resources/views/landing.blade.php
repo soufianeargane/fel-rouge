@@ -72,7 +72,9 @@
             <div class="head">
                 <h1>ALL The School Supplies You Need. We Make It Easy </h1>
                 <p>Get the school supplies you need from your favorite store while you're home. We make it easy for you to get the best quality school supplies at the best price.</p>
-                <a href="">
+                <a href="{{
+                    route('redirect')
+                }}">
                     <button>Get Started</button>
                 </a>
             </div>

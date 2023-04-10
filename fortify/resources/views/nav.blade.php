@@ -12,16 +12,60 @@
                 </a>
             </div>
             <div class="ul__app">
+                @if(! Auth::check() )
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                @else
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li>
+                        <a href="{{route('user.orders')}}">
+                            orders
+                        </a>
+                    </li>
                 </ul>
+
+                @endif
+
                 @if(! Auth::check() && Request::route()->getName() != 'login')
                     <a href="{{url('/login')}}">
                         <button>Login</button>
                     </a>
+                @endif
+                @if (Auth::check())
+                    <div class="icons d-flex align-center">
+
+                        <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
+                            <span class="sr-only">Open user menu</span>
+                            <img class="w-8 h-8 rounded-full" src="{{asset('img/avatar.png')}}" alt="user photo">
+                        </button>
+
+                        <!-- Dropdown menu -->
+                        <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                <div>
+                                    <!-- logged in admin -->
+                                    {{ Auth::user()->name }}
+                                </div>
+                                <div class="font-medium truncate">{{ Auth::user()->email }}</div>
+                            </div>
+                            <ul style="display: block" class="py-2 text-sm text-gray-700 dark:text-gray-200 block" aria-labelledby="dropdownUserAvatarButton">
+                                <li>
+                                    <a href="{{url('profile/edit')}}" class="block py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit Profile</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('profile/password')}}" class="block  py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit Password</a>
+                                </li>
+                            </ul>
+                            <div class="py-2">
+                                <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                            </div>
+                        </div>
+
+                    </div>
                 @endif
             </div>
             <div id="show-navbar" class="icon__nav">

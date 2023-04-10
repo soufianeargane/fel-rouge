@@ -42,7 +42,7 @@ Route::get('profile/password', function () {
     return view('profile.password');
 })->middleware(['auth']);
 
-Route::get('redirect', [RedirectController::class, 'redirect'])->middleware(['auth']);
+Route::get('redirect', [RedirectController::class, 'redirect'])->middleware(['auth'])->name('redirect');
 
 
 
