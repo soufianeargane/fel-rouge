@@ -170,7 +170,7 @@ class StoreController extends Controller
             // $total_profit contains the total profit of the store from last month
          */
         // ===================================================
-        
+
         $store = Store::find($id);
         if(!$store){
             return abort(404, 'store not found');
@@ -191,12 +191,12 @@ class StoreController extends Controller
         }
         $products = $store->products;
         $product_count = $products->count();
-        
+
         return view('admin.store-alldetails', compact('store', 'total_profit', 'total_orders', 'total_orders_accepted', 'total_orders_rejected', 'product_count'));
 
         // count of products
 
-        
+
         // return view('admin.store-details', compact('store'));
     }
 
@@ -214,15 +214,16 @@ class StoreController extends Controller
         $user->save();
 
 
-        
+
         $store->status = 2;
         $store->save();
 
         return redirect()->back()->with('message', 'store deleted successfully');
     }
 
+
     public function filterStores($id){
-        $stores = Store::where('city_id', $id)->get();
+        $stores = Store::where('city_id', $id)->whereNull('deleted_at')->get();
         return response()->json([
             'stores' => $stores,
         ]);

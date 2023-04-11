@@ -51,7 +51,23 @@
             transition: all 0.3s ease-in-out;
         }
 
-        
+        .color_{
+            background-color: #7cbda0;
+            color: #fff;
+        }
+        .color_:hover{
+            background-color: #92a98f;
+            color: #fff;}
+
+        .s-color{
+            background-color: #92a98f;
+            color: #fff;
+        }
+        .s-color:hover{
+            background-color: #7cbda0;
+            color: #000;
+        }
+
 
     </style>
 
@@ -62,13 +78,10 @@
         <button id="toggleSidebarMobile" class="fixed bottom-4 right-4 z-50 bg-red-800 text-white p-2 rounded-full shadow-md block md:hidden">
             <i class="bi bi-layout-text-sidebar-reverse"></i>
         </button>
-        <div style="min-height: 100vh" class=" sidebar show--js  relative w-60 p-4 bg-red-800">
-            
+        <div style="min-height: 100vh" class=" sidebar shadow-md show--js z-10  relative w-60 p-4 s-color">
+
             <div class="content--js">
-                <a href="{{route('store.create')}}">
-                    <button class="bg-red-300 rounded p-2">apply to have a store</button>
-                </a>
-                <div class="mt-2">
+                <div class="mt-12">
                     <select class="city_input" id="select-beast" placeholder="Select a city..." autocomplete="off">
                         <option selected disabled value="">Select a city...</option>
                         @foreach ($cities as $city)
@@ -79,18 +92,29 @@
                     <button
                     class="bg-red-300 rounded p-1 mt-2 search-btn"
                     >
-                        search
+                        Filter
                     </button>
                 </div>
             </div>
-            
+
         </div>
-        
-        
+
+
         <div style class="bg-gray-100 py-2 px-4 make-w-full w-full">
-            <h3>Stores</h3>
+            <div class="flex justify-between">
+                <div>
+                    <h1
+                    class="text-2xl  text-gray-700 dark:text-gray-200"
+                    >Stores</h1>
+                </div>
+                <div>
+                    <a href="{{route('store.create')}}">
+                        <button class="s-color rounded px-3 py-2 w-full text-md shadow-2xl">Apply to have a store</button>
+                    </a>
+                </div>
+            </div>
             {{-- cards tailwind --}}
-            <div id="stores" class="flex flex-wrap gap-4">
+            <div id="stores" class="flex flex-wrap gap-4 px-2 py-4">
 
             </div>
         </div>
@@ -211,7 +235,7 @@
             sidebar.toggleClass('media__');
         });
 
-        
+
     });
 
     $(document).ready(function() {
