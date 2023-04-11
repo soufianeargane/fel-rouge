@@ -1,6 +1,13 @@
 <!-- hide login and register if user is logged in -->
+<style>
+    .shodow__{
+        box-shadow: 0px 10px 17px 0px rgba(69,62,62,0.21);
+        /* -webkit-box-shadow: 0px 10px 17px 0px rgba(69,62,62,0.51);
+        -moz-box-shadow: 0px 10px 17px 0px rgba(69,62,62,0.51); */
+    }
+</style>
 
-<nav>
+<nav class="bg-white shodow__">
     <div class=" mx-auto container ">
         <div class="nav__app">
             <div class="f__logo">

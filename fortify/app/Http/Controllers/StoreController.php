@@ -60,6 +60,9 @@ class StoreController extends Controller
             'city_id' => 'required|numeric',
             'neighborhood' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ], [
+            'phone.required' => 'Phone number is required',
+            'phone.regex' => 'Invalid phone number format. It must be a moroccan phone number',
         ]);
 
         $image = $request->file('image');

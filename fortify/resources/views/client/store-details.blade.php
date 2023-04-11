@@ -14,13 +14,18 @@
 
     </style>
     <div class="container mx-auto">
-        <div class="flex">
-            <div class="w-2/3">
+        <div class="flex flex-wrap">
+            <div class="w-full md:w-2/3">
                 <section class="text-gray-700 body-font overflow-hidden ">
-                    <div class="container py-5 mx-auto">
-                        <div class="lg:w-4/5 mx-auto flex flex-wrap">
-                        <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="https://www.whitmorerarebooks.com/pictures/medium/2465.jpg">
-                        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                    <div class="py-5 mx-auto">
+                        <div class="flex flex-wrap md:flex-nowrap">
+                        <div
+                        style="width: 279px; height: 330px; background-image: url({{ asset('img/store/'.$store->image) }}); background-size: cover; background-position: center;"
+                        class="mx-auto md:mx-0 "
+                        >
+
+                        </div>
+                        <div class="w-full md:w-1/2  pl-5 lg:py-6 mt-6 lg:mt-0">
                             <h2 class="text-sm title-font text-gray-500 tracking-widest">Store NAME</h2>
                             <h1 class="text-gray-900 text-3xl title-font font-medium mb-1 capitalize">
                                 {{ $store->title }}
@@ -40,9 +45,18 @@
                             </p>
                             <p class="leading-relaxed font-bold uppercase">
                                 {{ $store->user->name }}
-                            </p> <span>
+                            </p>
+                            <p>
                                     {{ $store->user->email }}
-                                </span>
+                            </p>
+                            <p
+                            class="leading-relaxed mt-4 font-bold"
+                            >
+                                Adress:
+                            </p>
+                            <p class="leading-relaxed">
+                                {{ $store->neighborhood }}, {{ $store->city->name }}
+                            </p>
                             <!-- <p class="leading-relaxed mt-5">
                                 {{ $store->neighborhood }}, {{ $store->city }}
                             </p> -->
@@ -53,14 +67,14 @@
                 </section>
             </div>
             <!-- comments -->
-            <div class="w-1/3 pr-8">
+            <div class="w-full md:w-1/3 ">
                     <section class=" dark:bg-gray-900 py-6">
                         <div class="max-w-2xl mx-auto px-4">
                             <div class="flex justify-between items-center mb-6">
                                 <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Leave a comment</h2>
                             </div>
                             <form method="post" action="" class="mb-2">
-                                <div class="py-2 px-1 mb-4  rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                <div class="py-2 bg-white px-1 mb-1  rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                                     <label for="comment" class="sr-only">Your comment</label>
                                     <input
                                      id="comment"
@@ -127,13 +141,15 @@
             @foreach ($products as $product)
             <div class="mt-4 p-2 mx-auto sm:mx-0">
         <div class="group relative">
-            <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 ">
+            <div class=" aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 ">
             <img
-            src="{{ asset('img/products/'.$product->image)}}" width="250px" height="300px"  class=" object-cover object-center">
+            src="{{ asset('img/products/'.$product->image)}}" width="150px" height="150px"
+            style="width: 150px !important; height: 150px !important;"
+            >
             </div>
             <div class="mt-4 flex justify-between">
             <div>
-                <h3 class="text-sm text-gray-700 search-js">
+                <h3 class="text-sm text-gray-800 font-medium search-js">
 
                     <span aria-hidden="true" class="absolute inset-0"></span>
                     {{ $product->name }}
@@ -222,13 +238,24 @@
                         $('#rating').val('');
                         // if data has message property
                         if (data.message) {
-                            // sweet alert
-                            Swal.fire({
-                                title: 'Error!',
-                                text: data.message,
-                                icon: 'error',
-                                confirmButtonText: 'Ok'
-                            });
+                            if (data.status == 'success') {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: data.message,
+                                    showConfirmButton: true,
+
+                                })
+                            } else {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'error',
+                                    title: data.message,
+                                    showConfirmButton: true,
+
+                                })
+
+                            }
                         }
                         $('#loading').hide();
                         $('#submit_rating').attr('disabled', false);
@@ -290,7 +317,7 @@
                                     <!-- Dropdown menu -->
 
                                 </footer>
-                                <p class="text-gray-500 dark:text-gray-400">
+                                <p class="text-gray-500 dark:text-gray-400 text-xs">
                                     ${comment.comment}
                                 .</p>
                             </article>`;

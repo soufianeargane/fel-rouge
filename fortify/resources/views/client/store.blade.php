@@ -100,7 +100,7 @@
                     </button>
                 </div>
             </div>
-            <div class="mt-12 p-1">
+            <div class="mt-12">
                 <input type="search"
                 placeholder="Search for a store"
                 id="search_input_store"

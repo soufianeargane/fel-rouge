@@ -25,10 +25,13 @@ class RatingController extends Controller
         $store_id = $request->store_id;
         // return $store_id;
         $user = Auth::user();
-        
+
         $order = $user->orders()->where('store_id', $store_id)->first();
         if (!$order) {
-            return response()->json(['message' => 'You need to make an order from this store to rate it']);
+            return response()->json([
+                'message' => 'You need to make an order from this store to rate it',
+                'status' => 'error'
+            ]);
         }
 
         $store = $store = Store::findOrFail($store_id);
@@ -43,6 +46,7 @@ class RatingController extends Controller
         // return response()->json(['message' => 'Rating submitted successfully']);
         // retturn all ratings for the store
         return response()->json([
+            'status' => 'success',
             'message' => 'Rating submitted successfully',
             'all ratings' => $store->ratings
         ]);
