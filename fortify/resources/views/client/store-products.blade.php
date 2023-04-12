@@ -26,11 +26,42 @@
             background-color: #549450;
             color: #000;
         }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+        }
+        .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            margin: -25px 0 0 -25px;
+            border: 5px solid #ccc;
+            border-top-color: #333;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
     </style>
 
     <button id="toggleSidebarMobile" class="fixed bottom-4 left-4 z-50 bg-green-800 text-white p-3 rounded-full shadow-md block md:hidden">
-            <i class="bi bi-layout-text-sidebar-reverse"></i>
-        </button>
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+    </button>
+    <div id="loader" class="loader hidden">
+        <div class="spinner"></div>
+    </div>
     <div class="flex">
         <div class="w-full md:w-2/3 p-3 pt-12 ">
             <h2 class="text-center">You can add any available product to the list</h2>
@@ -56,9 +87,9 @@
                         @if ($product->quantity == 0)
                         disabled
                         @endif
-                        class="add-to-order px-2 py-1 bg-red-200 disabled:bg-green-200 rounded">+</button>
+                        class="add-to-order px-4 py-2 font-bold text-xl bg-red-200 disabled:bg-red-500 rounded disabled:cursor-not-allowed">+</button>
                         <!-- decrease button -->
-                        <button class="decrease px-2 py-1 bg-orange-200 disabled:bg-blue-200" disabled>-</button>
+                        <button class="decrease px-4 py-2 font-bold text-xl bg-orange-200 disabled:bg-blue-200 disabled:cursor-not-allowed" disabled>-</button>
                     </div>
                 </div>
                 @endforeach
@@ -199,11 +230,19 @@
     $('#save-order').on('click', function() {
         // check if the order is empty
         if (order.length == 0) {
-            alert('Please add some products to the order');
+            // alert('Please add some products to the order');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please add some products to the order',
+                confirmButtonText: "okay",
+                showCancelButton: false,
+            });
             return;
         }
         console.log("siiiiii");
         // send the order to the server
+        $('#loader').removeClass('hidden');
 
         $.ajax({
             url: '/store/orders',
@@ -222,13 +261,18 @@
                 order = [];
                 // update the UI to reflect the new order
                 updateOrderUI();
+                $('#loader').addClass('hidden');
                 Swal.fire({
-    icon: 'success',
-    title: 'Order has been made successfully',
-    text: 'You will be redirected to the orders page',
-  confirmButtonText: "okay",
-  showCancelButton: false,
-  });
+                    icon: 'success',
+                    title: 'Order has been made successfully',
+                    text: 'You will be redirected to the orders page',
+                    confirmButtonText: "okay",
+                    showCancelButton: false,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/orders";
+                    }
+                });
             }
         });
     });
