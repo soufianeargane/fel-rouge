@@ -131,50 +131,49 @@
         });
 
         function renderProducts(response) {
-    // all products and quantity in table
-    var products = response.data;
-    var html = `
-        <table class="w-full text-center">
-            <thead>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-    `;
-    products.forEach(product => {
-        html += `
-            <tr>
-                <td>${product.name}</td>
-                <td>${product.pivot.quantity}</td>
-            </tr>
+        // all products and quantity in table
+        var products = response.data;
+        var html = `
+            <table style="width:100%; text-align:center; background-color: red;">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
         `;
-    });
-    html += `
-            </tbody>
-        </table>
-    `;
-    // append to modal body
-    $('#modal-body').html(html);
+        products.forEach(product => {
+            html += `
+                <tr>
+                    <td>${product.name}</td>
+                    <td>${product.pivot.quantity}</td>
+                </tr>
+            `;
+        });
+        html += `
+                </tbody>
+            </table>
+        `;
+        // append to modal body
+        $('#modal-body').html(html);
 
-    // Add download button
-    var downloadButton = `
-        <a href="#" class="btn btn-primary" id="download-pdf-btn">Download PDF</a>
-    `;
-    $('#modal-body').append(downloadButton);
+        // Add download button
+        var downloadButton = `
+            <a href="#" class="btn btn-primary" id="download-pdf-btn">Download PDF</a>
+        `;
+        $('#modal-body').append(downloadButton);
 
-    // Handle download button click event
-    $('#download-pdf-btn').on('click', function() {
-        // Get HTML content of table
-        var tableHtml = $('#modal-body table').parent().html();
+        // Handle download button click event
+        $('#download-pdf-btn').on('click', function() {
+            // Get HTML content of table
+            var tableHtml = $('#modal-body table').parent().html();
 
-        // URL-encode HTML content
-        var urlEncodedHtml = encodeURIComponent(tableHtml);
+            // URL-encode HTML content
+            var urlEncodedHtml = encodeURIComponent(tableHtml);
 
-        // Generate PDF using Laravel controller method
-        window.location.href = '/download-pdf?html=' + urlEncodedHtml;
-    });
-}
-
-    </script>
+            // Generate PDF using Laravel controller method
+            window.location.href = '/download-pdf?html=' + urlEncodedHtml;
+        });
+    }
+</script>

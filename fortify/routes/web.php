@@ -84,11 +84,11 @@ Route::middleware(['auth', 'owner'])->group(function () {
 
 
     // to download pdf
-    Route::get('/download-pdf', [OrderController::class, 'downloadPdf']);
+
 });
-
-
 Route::get('/owner/orders-details/{id}', [OrderController::class, 'show'])->middleware(['auth']);
+Route::get('/download-pdf', [OrderController::class, 'downloadPdf']);
+
 
 
 // user route
