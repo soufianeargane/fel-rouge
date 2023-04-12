@@ -134,6 +134,20 @@ class StoreController extends Controller
     {
         // get the store with the given id
         $store = Store::find($id);
+        if(!$store){
+            return abort(403, 'store not found');
+        }
+
+        // check if the store is accepted
+        if($store->status != 1){
+            return abort(403, 'store not found');
+        }
+
+        // check if the store is deleted
+        if($store->deleted_at != null){
+            return abort(403, 'store not found');
+        }
+
         // get all products of this store
         $products = $store->products;
 
