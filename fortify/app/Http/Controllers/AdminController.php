@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Mail\AcceptStoreEmail;
@@ -15,15 +17,47 @@ class AdminController extends Controller
     {
         // get all users except admin
         $users = User::where('role', '!=', 2)->get();
+
+        $lastMonth = Carbon::now()->subMonth();
+        // $userStats = User::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+        // ->where('created_at', '>', $lastMonth)
+        // ->groupBy('date')
+        // ->orderBy('date')
+        // ->get();
+
+        $year = Carbon::now()->year;
+
+        // Initialize an array to store the monthly user signups count
+        $monthlySignups = [];
+        $monthlyOrders = [];
+
+        // Loop through each month of the year
+        for ($month = 1; $month <= 12; $month++) {
+            // Count the user signups for the given month
+            $signups = User::whereMonth('created_at', $month)
+                ->whereYear('created_at', $year)
+                ->count();
+
+            $orders = Order::whereMonth('created_at', $month)
+                ->whereYear('created_at', $year)
+                ->count();
+
+            // Add the signups count to the array
+            $monthlySignups[] = $signups;
+            $monthlyOrders[] = $orders;
+        }
+
+
+
         // return view('admin.dashboard');
-        return view('admin.dashboard', compact('users'));
+        return view('admin.dashboard', compact('users', 'monthlySignups', 'monthlyOrders'));
     }
 
     public function demandes()
     {
         // get all stores where status is 0
         $pending_stores = Store::where('status', 0)->get();
-        
+
         // return view('admin.dashboard');
         return view('admin.demandes', compact('pending_stores'));
     }
