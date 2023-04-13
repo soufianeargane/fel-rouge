@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreStoreRequest;
 use App\Http\Requests\UpdateStoreRequest;
 use Illuminate\Validation\Rules\PhoneNumber;
@@ -36,6 +37,17 @@ class StoreController extends Controller
      */
     public function create()
     {
+        $user = Auth::user();
+
+        // check if the user has a store with status 0
+        $store = $user->stores()->where('status', 0)->first();
+
+        // if the user has a store with status 0, redirect them to the special view
+        if ($store) {
+            $title = 'Waiting for Approval';
+            $discription = 'You Have a Pending Request, Please Wait for Approval';
+            return view('client.refuse', compact('title', 'discription'));
+        }
         // get all cities
         $cities = City::all();
 
@@ -114,9 +126,41 @@ class StoreController extends Controller
      * @param  \App\Models\Store  $store
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateStoreRequest $request, Store $store)
+    public function update(Request $request)
     {
         //
+        $validate = $request->validate([
+            'title' => 'required',
+            'phone' => [
+                'required',
+                'regex:/^(?:\+212|0)[1-9][\d]{8}$/'
+            ],
+            'city_id' => 'required|numeric',
+            'neighborhood' => 'required',
+        ], [
+            'phone.required' => 'Phone number is required',
+            'phone.regex' => 'Invalid phone number format. It must be a moroccan phone number',
+        ]);
+
+        $user_id = auth()->user()->id;
+        // get store of this user and not deleted
+        $store = Store::where('user_id', $user_id)->where('deleted_at', null)->first();
+        if(!$store){
+            return abort(403, 'store not found');
+        }
+        $store->title = $request->title;
+        $store->phone = $request->phone;
+        $store->city_id = $request->city_id;
+        $store->neighborhood = $request->neighborhood;
+        if($request->image){
+            $image = $request->file('image');
+            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('img/store'), $new_name);
+            $store->image = $new_name;
+        }
+        $store->save();
+        // session flash success
+        return redirect()->back()->with('message', 'your store was updated successfully');
     }
 
     /**
@@ -244,5 +288,18 @@ class StoreController extends Controller
         return response()->json([
             'stores' => $stores,
         ]);
+    }
+
+    public function ownerStore()
+    {
+        # code...
+        $store = Store::where('user_id', auth()->user()->id)->first();
+        $cities = City::all();
+
+        if(!$store){
+            return abort(404, 'store not found');
+        }
+        // dd($store);
+        return view('owner.store-info', compact('store', 'cities'));
     }
 }
