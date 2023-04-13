@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Mail\AcceptStoreEmail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
@@ -48,9 +49,16 @@ class AdminController extends Controller
         }
 
 
+        $topStores = Store::withCount('orders')
+            ->withSum('orders', 'total_price')
+            ->orderBy('orders_sum_total_price', 'desc')
+            ->limit(3)
+            ->get();
+            // $topStores = Store::with('orders')->get();
+        // dd($topStores);
 
         // return view('admin.dashboard');
-        return view('admin.dashboard', compact('users', 'monthlySignups', 'monthlyOrders'));
+        return view('admin.dashboard', compact('users', 'monthlySignups', 'monthlyOrders', 'topStores'));
     }
 
     public function demandes()
