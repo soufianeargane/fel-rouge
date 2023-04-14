@@ -91,10 +91,10 @@
                         type="submit">Save</button>
                     </div>
                     <div>
-                        <a>
+                        <a href="{{route('owner.store-delete')}}">
                             <button
                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                            type="submit">Delete</button>
+                            type="button">Delete</button>
                         </a>
                     </div>
 

@@ -74,6 +74,20 @@
 
 
     </style>
+    @if (session()->has('message'))
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)"
+             x-show="show" 
+             x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+             class="fixed top-0 right-0  px-12 w-96 py-3 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded ">
+            <p>{{session()->get('message') }}</p>
+        </div>
+    @endif
+
 
     <div id="loader" class="loader hidden">
         <div class="spinner"></div>
@@ -135,6 +149,8 @@
 
 
 </x-store>
+<script src="//unpkg.com/alpinejs" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
 {{-- jquery cdn --}}

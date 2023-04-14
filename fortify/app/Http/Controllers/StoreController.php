@@ -90,8 +90,7 @@ class StoreController extends Controller
         );
         Store::create($form_data);
         // session flash success
-        session()->flash('message', 'your request was added successfully. you will be informed via email if you get accepted .' );
-        return redirect()->back();
+        return redirect()->route('user')->with('message', 'your request was added successfully. you will be informed via email if you get accepted .');
     }
 
     /**
@@ -286,6 +285,7 @@ class StoreController extends Controller
 
 
         $store->status = 2;
+        $store->deleted_at = now();
         $store->save();
 
         return redirect()->back()->with('message', 'store deleted successfully');
@@ -310,5 +310,35 @@ class StoreController extends Controller
         }
         // dd($store);
         return view('owner.store-info', compact('store', 'cities'));
+    }
+
+    public function deleteOneStore(Request $request){
+        $store = Store::where('user_id', auth()->user()->id)->first();
+        if(!$store){
+            return abort(404, 'store not found');
+        }
+
+        // get orders of this store where status is 0
+        $orders = $store->orders()->where('status', 0)->get();
+        $size = $orders->count();
+        if($size > 0){
+            $title = 'Request denied';
+            $discription = 'You can not delete Your Store because it has orders that are not Accepted or Rejected';
+            return view('client.refuse', compact('title', 'discription'));
+        }
+
+        $store->status = 2;
+        $store->deleted_at = now();
+        $store->save();
+
+        $user = User::find($store->user_id);
+        $user->role = 0;
+        $user->save();
+
+        // logout
+        Auth::logout();
+
+        return redirect()->route('/')->with('message', 'store deleted successfully');
+
     }
 }

@@ -15,12 +15,20 @@ class ProductController extends Controller
     public function index()
     {   
         $user_id = Auth::id();
+        
+        // $products = Product::whereHas('store', function ($query) use ($user_id) {
+        //     $query->where('user_id', $user_id);
+        // })->with('category')->get();
+        // $ss = $products->toArray();
+        $store = Store::where('user_id', auth()->user()->id)
+                ->where('status', 1)
+                ->first();
+        $products = Product::where('store_id', $store->id)
+                ->with('category')
+                ->get();
+    
         // get all categories
         $categories = Category::all();
-        $products = Product::whereHas('store', function ($query) use ($user_id) {
-            $query->where('user_id', $user_id);
-        })->with('category')->get();
-        // $ss = $products->toArray();
         return view('owner.products', compact('categories', 'products'));
     }
 

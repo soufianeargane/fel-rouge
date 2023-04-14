@@ -87,6 +87,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // stores route
     Route::get('owner/store-info', [StoreController::class, 'ownerStore'])->name('owner.store-info');
     Route::post('owner/store-info/update', [StoreController::class, 'update'])->name('owner.store-info.update');
+    Route::get('owner/store-info/delete', [StoreController::class, 'deleteOneStore'])->name('owner.store-delete');
     // to download pdf
 
 });
