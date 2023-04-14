@@ -30,7 +30,7 @@
                 </div>
             @endif
     <div class="p-2 md:px-8">
-        <form action="{{route('owner.store-info.update')}}" method="post">
+        <form action="{{route('owner.store-info.update')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="flex flex-col gap-10">
                 <div class="flex flex-col lg:flex-row justify-between gap-3">
@@ -104,9 +104,18 @@
     </div>
 
 </x-owner>
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
 <script>
     var loadFile = function(event) {
         var image = document.getElementById('output');
         image.src = URL.createObjectURL(event.target.files[0]);
     };
+    new TomSelect("#city_id",{
+        create: true,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+    });
 </script>
