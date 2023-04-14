@@ -269,6 +269,15 @@ class StoreController extends Controller
             return abort(404, 'store not found');
         }
 
+        // get orders of this store where status is 0
+        $orders = $store->orders()->where('status', 0)->get();
+        $size = $orders->count();
+        if($size > 0){
+            $title = 'Request denied';
+            $discription = 'You can not delete This Store because it has orders that are not Accepted or Rejected';
+            return view('client.refuse', compact('title', 'discription'));
+        }
+
         // get user with this store
         $user = User::find($store->user_id);
         $user->role = 0;
