@@ -106,7 +106,14 @@ class RatingController extends Controller
         return view('admin.comments', compact('commentsData'));
     }
 
-    public function deleteComment($id){
+    public function deleteComment(Request $request){
+        // validate the request
+        $request->validate([
+            'comment_id' => 'required|integer',
+        ]);
+        $id = $request->comment_id;
         DB::table('ratings')->where('id', $id)->delete();
+
+        return redirect()->back()->with('message', 'Comment deleted successfully');
     }
 }

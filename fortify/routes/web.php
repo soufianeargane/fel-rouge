@@ -64,6 +64,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/store/delete', [StoreController::class, 'deleteStore'])->name('admin.stores.delete');
 
     Route::get('/admin/comments', [RatingController::class, 'adminComments'])->name('admin.comments');
+    Route::post('/admin/comments/delete', [RatingController::class, 'deleteComment'])->name('admin.comments.delete');
 });
 
 
