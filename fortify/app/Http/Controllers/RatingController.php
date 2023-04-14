@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Store;
 use Illuminate\Http\Request;
 // use User model
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,5 +81,32 @@ class RatingController extends Controller
             'average_rating' => $averageRating,
             'latest_comments' => $latestCommentsData,
         ]);
+    }
+
+    public function adminComments(){
+
+        // get all comments with user and store
+        $comments = Store::with('ratings.user')->get();
+
+        $commentsData = [];
+        foreach ($comments as $comment) {
+            foreach ($comment->ratings as $rating) {
+                $commentsData[] = [
+                    'id' => $rating->id,
+                    'rating' => $rating->rating,
+                    'comment' => $rating->comment,
+                    'created_at' => $rating->created_at->diffForHumans(),
+                    'user_name' => $rating->user->name,
+                    'store_name' => $comment->title,
+                ];
+            }
+        }
+        // dd($commentsData);
+
+        return view('admin.comments', compact('commentsData'));
+    }
+
+    public function deleteComment($id){
+        DB::table('ratings')->where('id', $id)->delete();
     }
 }

@@ -267,6 +267,7 @@
                 alert('Please add at least one product to the order');
                 return;
             }
+            $('#loader').removeClass('hidden');
 
             // send the order to the server
             $.ajax({
@@ -279,6 +280,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
+                    $('#loader').addClass('hidden');
                     console.log(response);
                     Swal.fire({
                         title: 'Success!',

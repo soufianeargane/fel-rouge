@@ -47,6 +47,12 @@
                         <span>Stores</span>
                     </a>
                 </li>
+                <li>
+                    <a class="flex align-center text-sm text-black rounded-md p-2.5" href="{{route('admin.comments')}}">
+                        <i class="bi bi-bar-chart-steps"></i>
+                        <span>Comments</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="content w-full">
