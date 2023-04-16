@@ -86,10 +86,43 @@
             </div>
         </div>
     </div>
-    <div class="flex mt-12">
-        <div class="w-80 h-80">
+    <div class="flex mt-12 items-center   flex-wrap">
+        <div class="w-80  md:w-1/3 mx-auto md:mx-0">
 
             <canvas id="doughnutChart"></canvas>
+        </div>
+        <div class="w-full md:w-2/3 px-6 py-3">
+            <div class="w-full">
+                <!-- BEGIN card -->
+                <div class=" bg-gray-800 text-white ">
+                    <a href="#">
+                        <div class="p-3">
+                            <b>COMMENTS: </b>
+                        </div>
+                        <div>
+                            <table class="w-full text-center table-auto">
+                                <thead class="w-full text-sm  text-gray-500 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">User</th>
+                                        <th scope="col" class="px-6 py-3">Commet</th>
+                                        <th scope="col" class="px-6 py-3">Rating</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($commentsData as $comment)
+                                        <tr class=" border-b dark:bg-gray-900 dark:border-gray-700">
+                                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">{{ $comment['user_name']}}</th>
+                                            <td>{{ $comment['comment'] }}</td>
+                                            <td>{{ $comment['rating'] }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
         </div>
     </div>
 
@@ -117,7 +150,7 @@
                 }]
             },
             options: {
-                responsive: true,
+                responsive: false,
             }
         });
 

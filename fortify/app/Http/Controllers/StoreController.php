@@ -203,7 +203,9 @@ class StoreController extends Controller
     public function adminStore()
     {
         # code...
-        $stores = Store::with('city')->get();
+        $stores = Store::with('city')
+                ->where('status', '!=', '0')
+                ->get();
         return view('admin.stores', compact('stores'));
     }
 
@@ -343,7 +345,7 @@ class StoreController extends Controller
         // logout
         Auth::logout();
 
-        return redirect()->route('/')->with('message', 'store deleted successfully');
+        return redirect()->route('login')->with('message', 'store deleted successfully');
 
     }
 }

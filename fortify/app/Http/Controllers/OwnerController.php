@@ -56,7 +56,7 @@ class OwnerController extends Controller
             $commentsData = array_slice($commentsData, -3);
         }
         // $commentsData = array_slice($commentsData, -3);
-        dd($commentsData);
+        // dd($commentsData);
 
 
         // get status of orders
