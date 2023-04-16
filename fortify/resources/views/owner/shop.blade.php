@@ -86,8 +86,11 @@
             </div>
         </div>
     </div>
-    <div class="w-1/2">
-    <canvas id="doughnutChart"></canvas>
+    <div class="flex mt-12">
+        <div class="w-80 h-80">
+
+            <canvas id="doughnutChart"></canvas>
+        </div>
     </div>
 
 </x-owner>

@@ -22,6 +22,7 @@ class ProductController extends Controller
         // $ss = $products->toArray();
         $store = Store::where('user_id', auth()->user()->id)
                 ->where('status', 1)
+                ->whereNull('deleted_at')
                 ->first();
         $products = Product::where('store_id', $store->id)
                 ->with('category')
@@ -44,7 +45,10 @@ class ProductController extends Controller
         ]);
 
         $user_id = Auth::id();
-        $store = Store::where('user_id', $user_id)->first();
+        $store = Store::where('user_id', $user_id)
+                ->where('status', 1)
+                ->whereNull('deleted_at')
+                ->first();
         $store_id = $store->id;
 
         $product = new Product();

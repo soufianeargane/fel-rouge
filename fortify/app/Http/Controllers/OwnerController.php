@@ -31,7 +31,8 @@ class OwnerController extends Controller
 
         if ($store) {
             $averageRating = $store->averageRating;
-            $comments = Store::with('ratings.user')->where('id', $store->id)->first();
+            // $comments = Store::with('ratings.user')->where('id', $store->id)->orderByDesc('created_at')->take(3)->get();
+            $comments = $store->ratings;
 
             if ($comments) {
                 $commentsData = [];
@@ -45,6 +46,18 @@ class OwnerController extends Controller
                 }
             }
         }
+
+        // dd $commentsData
+        
+        // dd $comments;
+
+        // get last 3 elements is array if array has more than 3 elements
+        if (count($commentsData) > 3) {
+            $commentsData = array_slice($commentsData, -3);
+        }
+        // $commentsData = array_slice($commentsData, -3);
+        dd($commentsData);
+
 
         // get status of orders
         $orders = $store->orders ;

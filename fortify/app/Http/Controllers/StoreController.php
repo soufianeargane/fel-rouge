@@ -22,7 +22,9 @@ class StoreController extends Controller
     public function index()
     {
         //
-        $accepted_stores = Store::where('status', '1')->get();
+        $accepted_stores = Store::where('status', '1')
+            ->whereNull('deleted_at')
+            ->get();
         return response()->json([
             'stores' => $accepted_stores,
         ]);
@@ -314,7 +316,9 @@ class StoreController extends Controller
     }
 
     public function deleteOneStore(Request $request){
-        $store = Store::where('user_id', auth()->user()->id)->first();
+        $store = Store::where('user_id', auth()->user()->id)
+            ->whereNull('deleted_at')
+        ->first();
         if(!$store){
             return abort(404, 'store not found');
         }

@@ -5,13 +5,13 @@
         <div class="w-1/2 p-3">
             <div class=" border">
                 <canvas id="userSignupsChart"></canvas>
-                <!-- <canvas id="userStatsChart"></canvas> -->
+                <!-- <canvas id=" "></canvas> -->
             </div>
         </div>
         <div class="w-1/2 p-3">
             <table
             class="table-auto border-collapse w-full text-center "
-            ">
+            >
                 <thead>
                     <tr>
                         <th>Store Name</th>
