@@ -345,7 +345,7 @@ class StoreController extends Controller
         // logout
         Auth::logout();
 
-        return redirect()->route('login')->with('message', 'store deleted successfully');
+        return redirect()->route('landing')->with('message', 'store deleted successfully');
 
     }
 }

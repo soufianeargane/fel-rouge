@@ -26,7 +26,7 @@ use App\Http\Controllers\RedirectController;
 
 Route::get('/', function () {
     return view('landing');
-});
+})->name('landing');
 
 // profile
 
