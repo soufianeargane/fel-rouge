@@ -15,7 +15,18 @@ class OwnerController extends Controller
         $store = Store::where('user_id', $user_id)->where('status', 1)->first();
         // dd($store);
         $products = $store->products;
+        $total_products = count($products);
+
         $orders = $store->orders ;
+        $total_orders = count($orders);
+
+        $total_revenue = 0;
+        foreach ($orders as $order) {
+            if ($order->status == 1) {
+                # code...
+                $total_revenue += $order->total_price;
+            }
+        }
 
         if ($store) {
             $averageRating = $store->averageRating;
@@ -52,6 +63,6 @@ class OwnerController extends Controller
         }
 
 
-        return view('owner.shop', compact('store', 'commentsData', 'averageRating', 'statusCounts'));
+        return view('owner.shop', compact('store', 'commentsData', 'averageRating', 'statusCounts', 'total_products', 'total_orders', 'total_revenue'));
     }
 }
