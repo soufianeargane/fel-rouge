@@ -12,7 +12,8 @@ class OwnerController extends Controller
     public function index()
     {
         $user_id = auth()->user()->id;
-        $store = Store::where('user_id', $user_id)->where('status', 1)->first();
+        $store = Store::where('user_id', $user_id)->where('status', 1)->whereNull('deleted_at')->first();
+
         // dd($store);
         $products = $store->products;
         $total_products = count($products);

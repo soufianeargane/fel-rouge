@@ -302,7 +302,8 @@ class StoreController extends Controller
     public function ownerStore()
     {
         # code...
-        $store = Store::where('user_id', auth()->user()->id)->first();
+        // $store = Store::where('user_id', auth()->user()->id)->first();
+        $store = Store::where('user_id', auth()->user()->id)->whereNull('deleted_at')->first();
         $cities = City::all();
 
         if(!$store){

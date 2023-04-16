@@ -75,7 +75,7 @@ class OrderController extends Controller
         // get all orders of owner
         $user_id = auth()->user()->id;
         //get store of owner
-        $store = Store::where('user_id', $user_id)->first();
+        $store = Store::where('user_id', $user_id)->where('status', 1)->whereNull('deleted_at')->first();
         $store_id = $store->id;
         $orders = Order::where('store_id', $store_id)
             ->with('products', function ($query) {
