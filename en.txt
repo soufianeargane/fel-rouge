@@ -29,10 +29,10 @@ REDIS_PASSWORD=null
 REDIS_PORT=6379
 
 MAIL_MAILER=smtp
-MAIL_HOST=smtp.gmail.com
-MAIL_PORT=587
-MAIL_USERNAME=config.laravel@gmail.com
-MAIL_PASSWORD=tgnwaxctlsliiwgb
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=eb163b7834061e
+MAIL_PASSWORD=b16c9743fefb99
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS="config.laravel@gmail.com"
 MAIL_FROM_NAME="${APP_NAME}"

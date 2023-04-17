@@ -1,5 +1,5 @@
 // media queries
-@use './sass/media' as *; 
+@use './sass/media' as *;
 @use './sass/colors' as *;
 
 // fonts
@@ -75,7 +75,7 @@ nav{
             }
             ul{
                 @include flex(row, space-between , center);
-                
+
                 li{
                     list-style: none;
                     margin: 0 10px;
@@ -98,7 +98,7 @@ nav{
                 }
             }
             a{
-                
+
                 button{
                     padding: 5px 40px;
                     border-radius: 30px;
@@ -143,7 +143,7 @@ nav{
         width: 100%;
         transition: all 0.5s ;
         display: none;
-        
+
         @include breakpoints(small){
             display: block;
             background-color: #fff;
@@ -171,7 +171,7 @@ nav{
                 }
             }
         }
-        
+
     }
 }
 
@@ -260,7 +260,7 @@ header .head{
         display: none;
     }
     @include flex(row, space-between , flex-start);
-    
+
 }
 .one__service{
     padding: 10px 25px;
@@ -276,7 +276,7 @@ header .head{
             font-size: 50px;
             color: $second-color;
         }
-        
+
     }
     .content__service{
         @include flex(column, center ,center);
@@ -399,7 +399,7 @@ header .head{
                 font-weight: 500;
                 margin-bottom: 20px;
             }
-            
+
         }
         .submit_btn{
             float: right;
@@ -419,5 +419,21 @@ header .head{
             }
         }
     }
+}
+
+.alert-danger{
+    --tw-text-opacity: 1;
+    color: rgb(153 27 27 );
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding: 1rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(254 242 242 );
+    --tw-border-opacity: 1;
+    border-color: rgb(252 165 165 );
+    border-width: 1px;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 

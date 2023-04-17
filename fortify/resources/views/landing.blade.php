@@ -200,9 +200,20 @@
         <div class="container">
             <div class="contact__">
                 <p class="p-title">CONTACT</p>
-                <h1 class="p__head">WHo We Are</h1>
+                <h1 class="p__head">Tell Us Anything You Need</h1>
                 <div class="contact__form">
-                    <form class="form" action="">
+                    <form class="form" method="post" action="{{route('contact.store')}}">
+                        <!-- errors if any -->
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @csrf
                         <div class="form__group">
                             <label for="name">Name </label>
                             <input type="text" name="name" id="name" placeholder="Name">
@@ -210,6 +221,14 @@
                         <div class="form__group">
                             <label for="email">Email </label>
                             <input type="email" name="email" id="email" placeholder="Email">
+                        </div>
+                        <div class="form__group">
+                            <label for="phone">Phone </label>
+                            <input type="text" name="phone" id="phone" placeholder="phone">
+                        </div>
+                        <div class="form__group">
+                            <label for="subject">Subject </label>
+                            <input type="text" name="subject" id="subject" placeholder="subject">
                         </div>
                         <div class="form__group">
                             <label for="message">Message </label>

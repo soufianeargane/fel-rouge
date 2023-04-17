@@ -8,6 +8,7 @@ use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RedirectController;
@@ -111,3 +112,6 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/client/store/rating/details/{storeId}', [RatingController::class, 'showRating'])->name('store.rating.show');
     Route::get('/store/city/{id}', [StoreController::class, 'filterStores'])->name('store.city');
 });
+
+
+Route::post('/contact-store', [ContactController::class, 'store'])->name('contact.store');
