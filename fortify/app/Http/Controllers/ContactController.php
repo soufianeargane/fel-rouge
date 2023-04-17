@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Contact;
+use App\Mail\ContactMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
 
@@ -60,6 +63,13 @@ class ContactController extends Controller
         $contact->subject   = $request->subject;
         $contact->message   = $request->message;
         $contact->save();
+
+
+
+        $user = User::where('role', 2)->first();
+
+        // send email
+        Mail::to($user->email)->send(new ContactMail($contact->name));
 
         return redirect()->back()->with('success', 'Message envoyé avec succès');
     }
