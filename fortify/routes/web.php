@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
@@ -66,6 +67,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/comments', [RatingController::class, 'adminComments'])->name('admin.comments');
     Route::post('/admin/comments/delete', [RatingController::class, 'deleteComment'])->name('admin.comments.delete');
+
+    // route for all users
+    Route::get('admin/users', [UserController::class, 'allUsers'])->name('admin.users');
 });
 
 
