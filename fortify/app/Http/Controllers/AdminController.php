@@ -14,8 +14,14 @@ use Illuminate\Support\Facades\Mail;
 class AdminController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
+        // get ip adress of logged in user
+        // $ip = request()->ip();
+        // $ip = $request->ip();
+        // dd($ip);
+        
+
         // get all users except admin
         $users = User::where('role', '!=', 2)->get();
 

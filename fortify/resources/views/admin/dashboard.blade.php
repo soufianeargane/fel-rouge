@@ -1,5 +1,66 @@
 <x-dash>
     <h1 class="p-relative">Dashboard</h1>
+    <div class="flex justify-center bg-gray-100 py-10 px-4">
+        <!---== First Stats Container ====--->
+        <div class="container mx-auto pr-1">
+            <div class="w-64 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
+            <div class="h-16 bg-red-400 flex items-center justify-between">
+                <p class="mr-0 text-white text-lg pl-5">BT SUBSCRIBERS</p>
+            </div>
+            <div class="flex justify-between px-3 pt-3 mb-2 text-sm text-gray-600">
+                <p>TOTAL</p>
+            </div>
+            <p class="pb-4 pt-1 text-3xl ml-5">20,456</p>
+            <!-- <hr > -->
+            </div>
+        </div>
+            <!---== First Stats Container ====--->
+        
+            <!---== Second Stats Container ====--->
+        <div class="container mx-auto pr-1">
+            <div class="w-64 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
+            <div class="h-16 bg-blue-500 flex items-center justify-between">
+                <p class="mr-0 text-white text-lg pl-5">BT ACTIVE SUBSCRIBERS</p>
+            </div>
+            <div class="flex justify-between px-3 pt-3 mb-2 text-sm text-gray-600">
+                <p>TOTAL</p>
+            </div>
+            <p class="pb-4 pt-1 text-3xl ml-5">19,694</p>
+            <!-- <hr > -->
+            </div>
+        </div>
+            <!---== Second Stats Container ====--->
+        
+        <!---== Third Stats Container ====--->
+        <div class="container mx-auto pr-1">
+            <div class="w-64 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
+            <div class="h-16 bg-purple-400 flex items-center justify-between">
+                <p class="mr-0 text-white text-lg pl-5">BT OPT OUTS</p>
+            </div>
+            <div class="flex justify-between pt-3 px-3 mb-2 text-sm text-gray-600">
+                <p>TOTAL</p>
+            </div>
+            <p class="pb-4 pt-1 text-3xl ml-5">711</p>
+            <!-- <hr > -->
+            </div>
+        </div>
+        <!---== Third Stats Container ====--->
+        
+        <!---== Fourth Stats Container ====--->
+        <div class="container mx-auto">
+            <div class="w-64 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
+            <div class="h-16 bg-purple-900 flex items-center justify-between">
+                <p class="mr-0 text-white text-lg pl-5">BT TODAY'S SUBSCRIPTION</p>
+            </div>
+            <div class="flex justify-between pt-3 px-3 mb-2 text-sm text-gray-600">
+                <p>TOTAL</p>
+            </div>
+            <p class="pb-4 pt-1 text-3xl ml-5">0</p>
+            <!-- <hr > -->
+            </div>
+        </div>
+    <!---== Fourth Stats Container ====--->
+    </div>
 
     <div class="mt-5 flex">
         <div class="w-1/2 p-3">
