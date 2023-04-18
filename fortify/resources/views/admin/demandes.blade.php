@@ -45,9 +45,9 @@
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <a href="/demandes/{{$store->id}}/action/1"
-                                            class="px-4 py-1 text-sm text-red-400 bg-red-200 rounded-full">Accept</a>
-                                            <a href="#"
-                                            class="px-4 py-1 text-sm text-blue-600 bg-blue-200 rounded-full">Edit</a>
+                                            class="px-4 py-1 text-sm text-green-600 bg-green-200 rounded-full">Accept</a>
+                                            <a href="/demandes/{{$store->id}}/action/2"
+                                            class="px-4 py-1 text-sm text-red-500 bg-red-200 rounded-full">Refuse</a>
                                     </td>
                                 </tr>
                                 @endforeach
