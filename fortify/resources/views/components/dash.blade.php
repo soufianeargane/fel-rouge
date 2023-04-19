@@ -25,31 +25,31 @@
                 </li>
                 <li>
                     <a class="flex align-center text-sm text-black rounded-md p-2.5" href="{{route('demandes')}}">
-                        <i class="bi bi-bar-chart-steps"></i>
+                        <i class="bi bi-envelope"></i>
                         <span>demandes</span>
                     </a>
                 </li>
                 <li>
                     <a class="flex align-center text-sm text-black rounded-md p-2.5" href="{{route('admin.categories')}}">
-                        <i class="bi bi-bar-chart-steps"></i>
+                        <i class="bi bi-pencil"></i>
                         <span>Categories</span>
                     </a>
                 </li>
                 <li>
                     <a class="flex align-center text-sm text-black rounded-md p-2.5" href="{{route('admin.users')}}">
-                        <i class="bi bi-bar-chart-steps"></i>
+                        <i class="bi bi-people"></i>
                         <span>Users</span>
                     </a>
                 </li>
                 <li>
                     <a class="flex align-center text-sm text-black rounded-md p-2.5" href="{{route('admin.stores')}}">
-                        <i class="bi bi-bar-chart-steps"></i>
+                        <i class="bi bi-house-gear"></i>
                         <span>Stores</span>
                     </a>
                 </li>
                 <li>
                     <a class="flex align-center text-sm text-black rounded-md p-2.5" href="{{route('admin.comments')}}">
-                        <i class="bi bi-bar-chart-steps"></i>
+                        <i class="bi bi-bell-fill"></i>
                         <span>Comments</span>
                     </a>
                 </li>
@@ -93,7 +93,7 @@
                 </div>
             </div>
             <!-- End Head -->
-            <div class="p-5">
+            <div class="md:p-5 px-0">
                 {{ $slot }}
             </div>
         </div>

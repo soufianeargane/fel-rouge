@@ -4,9 +4,9 @@
 
     <div class="w-full mx-auto">
         <div class="flex flex-col">
-                <div class="w-full">
-                    <div class="p-12 border-b border-gray-200 shadow">
-                        <table class="divide-y divide-gray-300 w-full" id="dataTable">
+                <div class="w-72 sm:w-96 md:w-full mx-auto">
+                    <div class="p-1 overflow-x-auto border-b border-gray-200 shadow">
+                        <table class="divide-y divide-gray-300 w-full w-full text-center text-sm" id="dataTable">
                             <thead class="bg-gray-100">
                                 <tr>
                                     <th class="px-6 py-2 text-xs text-gray-500">

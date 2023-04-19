@@ -17,73 +17,75 @@
     </div>
     <div class="w-full mx-auto">
             <div class="flex flex-col">
-                <div class="w-full">
-                    <div class="p-12 border-b border-gray-200 shadow">
-                        <table class="divide-y divide-gray-300 w-full" id="dataTable">
-                            <thead class="bg-gray-100">
-                                <tr>
-                                    <th class="px-6 py-2 text-xs text-gray-500">
-                                        ID
-                                    </th>
-                                    <th class="px-6 py-2 text-xs text-gray-500">
-                                        Rating
-                                    </th>
-                                    <th class="px-6 py-2 text-xs text-gray-500">
-                                        Comment
-                                    </th>
-                                    <th class="px-6 py-2 text-xs text-gray-500">
-                                        Store Name
-                                    </th>
-                                    <th class="px-6 py-2 text-xs text-gray-500">
-                                        User Name
-                                    </th>
-                                    <th class="px-6 py-2 text-xs text-gray-500">
-                                        Created_at
-                                    </th>
-                                    <th class="px-6 py-2 text-xs text-gray-500">
-                                        action
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-500">
-                                @foreach ($commentsData as $comment)
-                                <tr class="whitespace-nowrap">
-                                    <td class="px-6 py-4 text-sm text-center text-gray-500">
-                                        {{$comment['id']}}
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        <div class="text-sm text-gray-900">
-                                            {{$comment['rating']}}
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-center text-gray-500">
-                                            {{ $comment['comment'] }}
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-center text-gray-500">
-                                        {{ $comment['store_name'] }}
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-center text-gray-500">
-                                        {{ $comment['user_name'] }}
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-center text-gray-500">
-                                        {{ $comment['created_at'] }}
-                                    </td>
-                                    <td class="px-6 py-4 flex justify-center gap-1 text-center">
-                                        <form
-                                        action="{{route('admin.comments.delete')}}" method="post"
-                                        >
-                                            <!-- input hidden -->
-                                            <input type="hidden" value="{{$comment['id']}}" name="comment_id">
-                                            @csrf
-                                            <button type="submit" class="px-4 py-1 text-sm text-red-400 bg-red-200 rounded-full">delete </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
+                <div  class="w-full">
+                    <div class="w-72 sm:w-96 md:w-full mx-auto">
+                        <div  class="border-b relative overflow-x-auto border-gray-200 shadow">
+                            <table  class="w-full text-sm" id="dataTable">
+                                <thead class="bg-gray-300">
+                                    <tr>
+                                        <th class="px-6 py-2 text-xs text-gray-500">
+                                            ID
+                                        </th>
+                                        <th class="px-6 py-2 text-xs text-gray-500">
+                                            Rating
+                                        </th>
+                                        <th class="px-6 py-2 text-xs text-gray-500">
+                                            Comment
+                                        </th>
+                                        <th class="px-6 py-2 text-xs text-gray-500">
+                                            Store Name
+                                        </th>
+                                        <th class="px-6 py-2 text-xs text-gray-500">
+                                            User Name
+                                        </th>
+                                        <th class="px-6 py-2 text-xs text-gray-500">
+                                            Created_at
+                                        </th>
+                                        <th class="px-6 py-2 text-xs text-gray-500">
+                                            action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-gray-100 divide-y divide-gray-500">
+                                    @foreach ($commentsData as $comment)
+                                    <tr class="whitespace-nowrap">
+                                        <td class="px-6 py-4 text-sm text-center text-gray-500">
+                                            {{$comment['id']}}
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
+                                            <div class="text-sm text-gray-900">
+                                                {{$comment['rating']}}
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-center text-gray-500">
+                                                {{ $comment['comment'] }}
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-center text-gray-500">
+                                            {{ $comment['store_name'] }}
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-center text-gray-500">
+                                            {{ $comment['user_name'] }}
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-center text-gray-500">
+                                            {{ $comment['created_at'] }}
+                                        </td>
+                                        <td class="px-6 py-4 flex justify-center gap-1 text-center">
+                                            <form
+                                            action="{{route('admin.comments.delete')}}" method="post"
+                                            >
+                                                <!-- input hidden -->
+                                                <input type="hidden" value="{{$comment['id']}}" name="comment_id">
+                                                @csrf
+                                                <button type="submit" class="px-4 py-1 text-sm text-red-400 bg-red-200 rounded-full">delete </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
 
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

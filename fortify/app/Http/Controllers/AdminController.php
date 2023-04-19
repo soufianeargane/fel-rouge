@@ -16,14 +16,11 @@ class AdminController extends Controller
     //
     public function index(Request $request)
     {
-        // get ip adress of logged in user
-        // $ip = request()->ip();
-        // $ip = $request->ip();
-        // dd($ip);
         
-
-        // get all users except admin
-        $users = User::where('role', '!=', 2)->get();
+        // count all users with role 0
+        $clients = User::where('role', 0)->count();
+        // count all users with role 1
+        $stores = User::where('role', 1)->count();
 
         $lastMonth = Carbon::now()->subMonth();
         // $userStats = User::selectRaw('DATE(created_at) as date, COUNT(*) as count')
@@ -60,11 +57,10 @@ class AdminController extends Controller
             ->orderBy('orders_sum_total_price', 'desc')
             ->limit(3)
             ->get();
-            // $topStores = Store::with('orders')->get();
-        // dd($topStores);
-
-        // return view('admin.dashboard');
-        return view('admin.dashboard', compact('users', 'monthlySignups', 'monthlyOrders', 'topStores'));
+        
+        
+        $total_profit = Order::sum('total_price');
+        return view('admin.dashboard', compact( 'monthlySignups', 'monthlyOrders', 'topStores', 'clients', 'stores', 'total_profit') );
     }
 
     public function demandes()

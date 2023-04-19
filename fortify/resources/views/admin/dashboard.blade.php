@@ -1,139 +1,104 @@
 <x-dash>
-    <h1 class="p-relative">Dashboard</h1>
-    <div class="flex justify-center bg-gray-100 py-10 px-4">
+    <h1 class="p-relative p-3">Dashboard</h1>
+    <div class="flex justify-between flex-wrap bg-gray-100 py-3 md:py-10 px-0 md:px-4">
         <!---== First Stats Container ====--->
-        <div class="container mx-auto pr-1">
+        <div class=" mx-auto  mb-2">
             <div class="w-64 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
             <div class="h-16 bg-red-400 flex items-center justify-between">
-                <p class="mr-0 text-white text-lg pl-5">BT SUBSCRIBERS</p>
+                <p class="mr-0 text-white text-lg pl-5">CLIENTS</p>
             </div>
             <div class="flex justify-between px-3 pt-3 mb-2 text-sm text-gray-600">
                 <p>TOTAL</p>
             </div>
-            <p class="pb-4 pt-1 text-3xl ml-5">20,456</p>
+            <p class="pb-4 pt-1 text-3xl ml-5">
+                {{$clients}}
+            </p>
             <!-- <hr > -->
             </div>
         </div>
             <!---== First Stats Container ====--->
         
             <!---== Second Stats Container ====--->
-        <div class="container mx-auto pr-1">
+        <div class=" mx-auto  mb-2">
             <div class="w-64 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
             <div class="h-16 bg-blue-500 flex items-center justify-between">
-                <p class="mr-0 text-white text-lg pl-5">BT ACTIVE SUBSCRIBERS</p>
+                <p class="mr-0 text-white text-lg pl-5">STORES</p>
             </div>
             <div class="flex justify-between px-3 pt-3 mb-2 text-sm text-gray-600">
                 <p>TOTAL</p>
             </div>
-            <p class="pb-4 pt-1 text-3xl ml-5">19,694</p>
+            <p class="pb-4 pt-1 text-3xl ml-5">
+                {{$stores}}
+            </p>
             <!-- <hr > -->
             </div>
         </div>
             <!---== Second Stats Container ====--->
         
         <!---== Third Stats Container ====--->
-        <div class="container mx-auto pr-1">
+        <div class=" mx-auto mb-2">
             <div class="w-64 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
             <div class="h-16 bg-purple-400 flex items-center justify-between">
-                <p class="mr-0 text-white text-lg pl-5">BT OPT OUTS</p>
+                <p class="mr-0 text-white text-lg pl-5">PROFIT</p>
             </div>
             <div class="flex justify-between pt-3 px-3 mb-2 text-sm text-gray-600">
                 <p>TOTAL</p>
             </div>
-            <p class="pb-4 pt-1 text-3xl ml-5">711</p>
+            <p class="pb-4 pt-1 text-3xl ml-5">
+                {{$total_profit}}
+            </p>
             <!-- <hr > -->
             </div>
         </div>
         <!---== Third Stats Container ====--->
-        
-        <!---== Fourth Stats Container ====--->
-        <div class="container mx-auto">
-            <div class="w-64 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
-            <div class="h-16 bg-purple-900 flex items-center justify-between">
-                <p class="mr-0 text-white text-lg pl-5">BT TODAY'S SUBSCRIPTION</p>
-            </div>
-            <div class="flex justify-between pt-3 px-3 mb-2 text-sm text-gray-600">
-                <p>TOTAL</p>
-            </div>
-            <p class="pb-4 pt-1 text-3xl ml-5">0</p>
-            <!-- <hr > -->
-            </div>
-        </div>
     <!---== Fourth Stats Container ====--->
     </div>
 
-    <div class="mt-5 flex">
-        <div class="w-1/2 p-3">
-            <div class=" border">
+    <div class="mt-5 flex flex-col md:flex-row">
+        <div class="w-80 md:w-1/2 mx-auto md:mx-0 px-0 md:p-3 ">
+            <div class=" w-full border">
                 <canvas id="userSignupsChart"></canvas>
                 <!-- <canvas id=" "></canvas> -->
             </div>
         </div>
-        <div class="w-1/2 p-3">
-            <table
-            class="table-auto border-collapse w-full text-center "
-            >
-                <thead>
-                    <tr>
-                        <th>Store Name</th>
-                        <th>Owner Name</th>
-                        <th>Total Revenue</th>
-                        <th>Total Orders</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($topStores as $store)
-                        <tr>
-                            <td>{{ $store->title }}</td>
-                            <td>{{ $store->user->name }}</td>
-                            <td>{{ $store->orders_sum_total_price }}</td>
-                            <td>
-                                @if($store->orders_count > 0)
-                                    {{ $store->orders_count }}
-                                @else
-                                    0
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <div class="w-full md:w-1/2  p-3">
             <div>
-            <div class="w-full">
-    <!-- BEGIN card -->
-    <div class="card border-0 mb-3 bg-gray-800 text-white">
-        <!-- BEGIN card-body -->
-        <div class="p-4">
-            <!-- BEGIN title -->
-            <div class="mb-3 text-gray-500 flex items-center">
-                <b>TOP PRODUCTS BY UNITS SOLD</b>
-                <span class="ml-2">
-                    <i class="fa fa-info-circle" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Top products with units sold" data-bs-placement="top" data-bs-content="Products with the most individual units sold. Includes orders from all sales channels."></i>
-                </span>
-            </div>
-            <!-- END title -->
-            <!-- BEGIN product -->
-            <div class="d-flex items-center mb-4">
-                <div class="widget-img rounded-3 me-2 bg-white p-1 w-8 h-8">
-                    <div class="h-full w-full" style="background: url(../assets/img/product/product-8.jpg) center no-repeat; background-size: auto 100%;"></div>
+                <div class="w-full">
+                    <!-- BEGIN card -->
+                    <div class="card border-0 mb-3 bg-gray-800 text-white">
+                        <!-- BEGIN card-body -->
+                        <div class="p-4">
+                            <!-- BEGIN title -->
+                            <div class="mb-3 text-gray-500 flex items-center">
+                                <b class="uppercase">Stores with most Profit</b>
+                            </div>
+                            <!-- END title -->
+                            <!-- BEGIN product -->
+                            @foreach($topStores as $store)
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="text-truncate ">
+                                    <div>{{ $store->title }}</div>
+                                    <div class="text-gray-500">
+                                        {{ $store->orders_sum_total_price ? $store->orders_sum_total_price : 0 }}
+                                    </div>
+                                </div>
+                                <div class="text-truncate flex flex-col justify-center items-center">
+                                    <div>{{ $store->user->name }}</div>
+                                    <div class="text-gray-500">
+                                        <span>orders:</span>
+                                        {{ $store->orders_count ? $store->orders_count : 0}}
+                                        </div>
+                                </div>
+                            </div>
+                            @endforeach
+                            
+                            <!-- END product -->
+                            <!-- Repeating the product template for each product -->
+                        </div>
+                        <!-- END card-body -->
+                    </div>
+                     <!-- END card -->
                 </div>
-                <div class="text-truncate flex-grow">
-                    <div>Apple iPhone XR (2021)</div>
-                    <div class="text-gray-500">$799.00</div>
-                </div>
-                <div class="ml-auto text-center">
-                    <div class="text-sm"><span data-animation="number" data-value="195">0</span></div>
-                    <div class="text-gray-500 text-xs">sold</div>
-                </div>
-            </div>
-            <!-- END product -->
-            <!-- Repeating the product template for each product -->
-        </div>
-        <!-- END card-body -->
-    </div>
-    <!-- END card -->
-</div>
-
             </div>
         </div>
     </div>

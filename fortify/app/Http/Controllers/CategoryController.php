@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-$ip = $request->ip();
+
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
