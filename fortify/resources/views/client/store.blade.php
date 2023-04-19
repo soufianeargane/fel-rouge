@@ -76,7 +76,7 @@
     </style>
     @if (session()->has('message'))
         <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)"
-             x-show="show" 
+             x-show="show"
              x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100"
@@ -96,7 +96,7 @@
         <button id="toggleSidebarMobile" class="fixed bottom-4 right-4 z-50 bg-red-800 text-white p-2 rounded-full shadow-md block md:hidden">
             <i class="bi bi-layout-text-sidebar-reverse"></i>
         </button>
-        <div style="min-height: 100vh" class=" sidebar shadow-md show--js z-10  relative w-60 p-4 s-color">
+        <div style="min-height: 100vh" class=" sidebar shadow-md show--js z-10  relative w-60 p-4 bg-black">
 
             <div class="content--js">
                 <div class="mt-12">

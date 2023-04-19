@@ -18,30 +18,20 @@
                 <p>My Time</p>
                 </a>
             </div>
-            <div class="ul__app">
-                @if(! Auth::check() )
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                @else
-                <ul>
-                    <li>
+            <div class="flex justify-between items-center">
+                <ul class="flex justify-between items-center">
+                    <li class="mr-6">
                         <a href="{{route('user.orders')}}">
                             orders
                         </a>
                     </li>
+                    <li class="mr-2">
+                        <a href="/user">
+                            stores
+                        </a>
+                    </li>
                 </ul>
 
-                @endif
-
-                @if(! Auth::check() && Request::route()->getName() != 'login')
-                    <a href="{{url('/login')}}">
-                        <button>Login</button>
-                    </a>
-                @endif
                 @if (Auth::check())
                     <div class="icons d-flex align-center">
 
@@ -75,17 +65,6 @@
                     </div>
                 @endif
             </div>
-            <div id="show-navbar" class="icon__nav">
-                <i class="bi bi-list"></i>
-            </div>
-        </div>
-        <div id="navbar" class="ul__phone navv">
-            <ul class="navv">
-                <li class="navv"><a class="navv" href="#">Home</a></li>
-                <li class="navv"><a class="navv" href="#">About</a></li>
-                <li class="navv"><a class="navv" href="#">Services</a></li>
-                <li class="navv"><a class="navv" href="#">Contact</a></li>
-            </ul>
         </div>
     </div>
 </nav>

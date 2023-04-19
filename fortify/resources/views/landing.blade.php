@@ -241,10 +241,55 @@
                 </div>
             </div>
         </div>
+    </div>
+    <footer class="bg-gray-800">
+            <div class="container mx-auto mt-5 py-5">
+                <div class="flex flex-wrap justify-center">
+                    <a href="#" class="text-white">
+                        <i class="fab fa-facebook-f text-xl mx-2"></i>
+                    </a>
+                    <a href="#" class="text-white">
+                        <i class="fab fa-twitter text-xl mx-2"></i>
+                    </a>
+                    <a href="#" class="text-white">
+                        <i class="fab fa-instagram text-xl mx-2"></i>
+                    </a>
+                    <a href="#" class="text-white">
+                        <i class="fab fa-youtube text-xl mx-2"></i>
+                    </a>
+                    <a href="#" class="text-white">
+                        <i class="fab fa-whatsapp text-xl mx-2"></i>
+                    </a>
+                </div>
+                <div class="flex flex-wrap justify-around mt-5">
+                    <div class="flex flex-col text-white mr-4">
+                        <p>
+                            <img class="logo" src="{{asset('images/logo1.png')}}" alt="">
+                            <span class="title ml-2">My Time</span>
+                        </p>
+                        <p class="ml-2">save your time </p>
+                        <p class="ml-2">et products at convinient price</p>
+                        <p class="ml-2 mb-5">with very confortable place.</p>
+                    </div>
+                    <div class="flex flex-col text-white mt-5">
+                        <p class="">
+                            <i class="fas fa-map-marker-alt text-lg mx-1"></i>Boulevard moulay youssef,
+                        </p>
+                        <p class="ml-4"> Youssoufia, Maroc</p>
+                    </div>
+                </div>
+                <hr class="pb-5 text-white text-center">
+                <div class="text-center py-2">
+                    <p class="text-white">© 2023 MyTime les droits sont réservés</p>
+                </div>
+            </div>
+        </footer>
+
 
         <!-- js  -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
         <script src="{{asset('js/home.js')}}"></script>
+        <script src="https://kit.fontawesome.com/1c3b083d98.js" crossorigin="anonymous"></script>
 
 </body>
 

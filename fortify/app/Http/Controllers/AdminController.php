@@ -16,7 +16,7 @@ class AdminController extends Controller
     //
     public function index(Request $request)
     {
-        
+
         // count all users with role 0
         $clients = User::where('role', 0)->count();
         // count all users with role 1
@@ -57,9 +57,9 @@ class AdminController extends Controller
             ->orderBy('orders_sum_total_price', 'desc')
             ->limit(3)
             ->get();
-        
-        
-        $total_profit = Order::sum('total_price');
+
+
+        $total_profit = Order::where('status', 1)->sum('total_price');
         return view('admin.dashboard', compact( 'monthlySignups', 'monthlyOrders', 'topStores', 'clients', 'stores', 'total_profit') );
     }
 
