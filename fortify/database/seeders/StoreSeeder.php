@@ -20,7 +20,7 @@ class StoreSeeder extends Seeder
             'title' => 'Store 1',
             'phone' => '0655555555',
             'neighborhood' => 'neighborhood 1',
-            'image' => 'image 1',
+            'image' => '128483776.jpg',
             'status' => 1,
             'user_id' => 2,
             'city_id' => 1,

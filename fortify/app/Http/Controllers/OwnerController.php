@@ -15,7 +15,8 @@ class OwnerController extends Controller
         $store = Store::where('user_id', $user_id)->where('status', 1)->whereNull('deleted_at')->first();
 
         // dd($store);
-        $products = $store->products;
+        // $products = $store->products;
+        $products = DB::table('products')->where('store_id', $store->id)->whereNull('deleted_at')->get();
         $total_products = count($products);
 
         $orders = $store->orders ;
@@ -48,7 +49,7 @@ class OwnerController extends Controller
         }
 
         // dd $commentsData
-        
+
         // dd $comments;
 
         // get last 3 elements is array if array has more than 3 elements

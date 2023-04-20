@@ -13,9 +13,9 @@ class ProductController extends Controller
 {
     //
     public function index()
-    {   
+    {
         $user_id = Auth::id();
-        
+
         // $products = Product::whereHas('store', function ($query) use ($user_id) {
         //     $query->where('user_id', $user_id);
         // })->with('category')->get();
@@ -25,9 +25,10 @@ class ProductController extends Controller
                 ->whereNull('deleted_at')
                 ->first();
         $products = Product::where('store_id', $store->id)
+                ->whereNull('deleted_at')
                 ->with('category')
                 ->get();
-    
+
         // get all categories
         $categories = Category::all();
         return view('owner.products', compact('categories', 'products'));
@@ -73,7 +74,8 @@ class ProductController extends Controller
         # code...
         $product = Product::find($id);
         $this->authorize('delete', $product);
-        $product->delete();
+        $product->deleted_at = now();
+        $product->save();
         session()->flash('success', 'Produit supprimé avec succès');
         return redirect()->back();
     }

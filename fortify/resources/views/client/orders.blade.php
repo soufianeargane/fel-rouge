@@ -10,63 +10,70 @@
     @endif
 
     <div class="container mx-auto px-6">
-    <p>Orders</p>
-    <table class="divide-y divide-gray-300 w-full text-center" id="dataTable">
-            <thead>
-                <tr>
-                    <th scope="col">Order ID</th>
-                    <th scope="col">Store</th>
-                    <th scope="col">Total Price</th>
-                    <th>Date</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($orders as $order)
-                    <tr>
-                        <th scope="row">{{ $order->id }}</th>
-                        <td >{{ $order->store->title }}</td>
-                        <td>{{ $order->total_price }}</td>
-                        <td>{{ $order->created_at }}</td>
-                        <td>
-                            <div class=" px-2 py-1 rounded font-bold
-                            @if($order->status == 0)
-                                text-orange-500
-                            @elseif($order->status == 1)
-                                text-green-800
-                            @else
-                                text-red-500
-                            @endif
-                            ">
-                            {{
-                            $order->status == 0 ? 'Pending' :
-                            ($order->status == 1 ? 'Accepted' : 'Rejected')
-                        }}
-                            </div>
+    <p
+    class="text-2xl font-semibold text-gray-700 dark:text-gray-200 py-4 text-center md:text-left"
+    >
+    Here are your orders:</p>
+    <div class="w-80 mt-8 sm:w-full mx-auto">
+        <div class="overflow-x-auto">
+            <table class="divide-y divide-gray-300 w-full text-center " id="dataTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Store</th>
+                            <th scope="col">Total Price</th>
+                            <th>Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($orders as $order)
+                            <tr>
+                                <th scope="row">{{ $order->id }}</th>
+                                <td >{{ $order->store->title }}</td>
+                                <td>{{ $order->total_price }}</td>
+                                <td>{{ $order->created_at }}</td>
+                                <td>
+                                    <div class=" px-2 py-1 rounded font-bold
+                                    @if($order->status == 0)
+                                        text-orange-500
+                                    @elseif($order->status == 1)
+                                        text-green-800
+                                    @else
+                                        text-red-500
+                                    @endif
+                                    ">
+                                    {{
+                                    $order->status == 0 ? 'Pending' :
+                                    ($order->status == 1 ? 'Accepted' : 'Rejected')
+                                }}
+                                    </div>
 
-                        </td>
-                        <td>
-                            <div class="flex gap-1 justify-center">
-                                <button data-modal-target="staticModal" data-modal-toggle="staticModal" class=" order-details px-2 py-1 bg-yellow-300 rounded">
-                                    View
-                                </button>
-                                @if($order->status == 0)
-                                    <a
-                                    href="/owner/orders/{{ $order->id }}/edit/{{ $order->store->id }}"
-                                    >
-                                        <button class="px-2 py-1 bg-green-300 rounded">Edit</button>
-                                    </a>
-                                        <a href="/client/orders/delete/{{$order->id}}"
-                                        >
-                                        <button type="" class="px-2 py-1 bg-red-300 rounded">Cancel</button></a>
-                                @endif
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                                </td>
+                                <td>
+                                    <div class="flex gap-1 justify-center">
+                                        <button data-modal-target="staticModal" data-modal-toggle="staticModal" class=" order-details px-2 py-1 bg-yellow-300 rounded">
+                                            View
+                                        </button>
+                                        @if($order->status == 0)
+                                            <a
+                                            href="/owner/orders/{{ $order->id }}/edit/{{ $order->store->id }}"
+                                            >
+                                                <button class="px-2 py-1 bg-green-300 rounded">Edit</button>
+                                            </a>
+                                                <a href="/client/orders/delete/{{$order->id}}"
+                                                >
+                                                <button type="" class="px-2 py-1 bg-red-300 rounded">Cancel</button></a>
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
 

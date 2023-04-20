@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\User;
 use App\Models\Store;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -104,7 +105,7 @@ class StoreController extends Controller
     public function show(Store $store)
     {
         // get all products of this store
-        $products = $store->products;
+        $products = Product::where('store_id', $store->id)->where('deleted_at', null)->get();
         return view('client.store-products', compact('products', 'store'));
 
     }
@@ -194,7 +195,8 @@ class StoreController extends Controller
         }
 
         // get all products of this store
-        $products = $store->products;
+        // $products = $store->products;
+        $products = Product::where('store_id', $store->id)->where('deleted_at', null)->get();
 
         return view('client.store-details', compact('products', 'store'));
     }
