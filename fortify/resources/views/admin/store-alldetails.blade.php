@@ -164,7 +164,7 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach ($store->products as $product)
+                        @foreach ($products as $product)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">{{$product->id}}</div>

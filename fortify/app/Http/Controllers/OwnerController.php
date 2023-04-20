@@ -59,6 +59,7 @@ class OwnerController extends Controller
         // $commentsData = array_slice($commentsData, -3);
         // dd($commentsData);
 
+        // $order_accepte = Order::where('store_id', $store->id)->where('status', 1)->count();
 
         // get status of orders
         $orders = $store->orders ;

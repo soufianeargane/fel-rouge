@@ -255,10 +255,12 @@ class StoreController extends Controller
                 $total_orders_rejected++;
             }
         }
-        $products = $store->products;
+        // $products = $store->products;
+        $products = Product::where('store_id', $store->id)->whereNull('deleted_at')->get();
+        // dd($products);
         $product_count = $products->count();
 
-        return view('admin.store-alldetails', compact('store', 'total_profit', 'total_orders', 'total_orders_accepted', 'total_orders_rejected', 'product_count'));
+        return view('admin.store-alldetails', compact('store', 'total_profit', 'total_orders', 'total_orders_accepted', 'total_orders_rejected', 'product_count', 'products'));
 
         // count of products
 
