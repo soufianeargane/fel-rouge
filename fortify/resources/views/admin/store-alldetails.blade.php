@@ -77,59 +77,65 @@
                 <div class="h-12 bg-red-400 flex items-center justify-between">
                     <p class="mr-0 text-white text-lg pl-5">Orders</p>
                 </div>
-                <table class="w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                    <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Order ID
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Customer Name
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Total Price
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach ($store->orders as $order)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{$order->id}}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{$order->user->name}}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{$order->total_price}} Dhs</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full
-                                @if ($order->status == 0)
-                                    bg-yellow-100 text-yellow-800
-                                @elseif($order->status == 1)
-                                    bg-green-100 text-green-800
-                                @elseif($order->status == 2)
-                                    bg-red-100 text-red-800
-                                @endif
-                                ">
-                                    @if ($order->status == 0)
-                                        Pending
-                                    @elseif($order->status == 1)
-                                        Accepted
-                                    @elseif($order->status == 2)
-                                        Rejected
-                                    @endif
+                <div class="overflow-x-auto">
+                    <div class="w-full">
 
-                                </span>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                    
+                        <table class="w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Order ID
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Customer Name
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Total Price
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($store->orders as $order)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">{{$order->id}}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">{{$order->user->name}}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">{{$order->total_price}} Dhs</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full
+                                        @if ($order->status == 0)
+                                            bg-yellow-100 text-yellow-800
+                                        @elseif($order->status == 1)
+                                            bg-green-100 text-green-800
+                                        @elseif($order->status == 2)
+                                            bg-red-100 text-red-800
+                                        @endif
+                                        ">
+                                            @if ($order->status == 0)
+                                                Pending
+                                            @elseif($order->status == 1)
+                                                Accepted
+                                            @elseif($order->status == 2)
+                                                Rejected
+                                            @endif
+
+                                        </span>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -142,51 +148,57 @@
                 <div class="h-12 bg-red-400 flex items-center justify-between">
                     <p class="mr-0 text-white text-lg pl-5">Products</p>
                 </div>
-                <table class="w-full divide-y text-center divide-gray-200">
-                    <thead class="bg-gray-50 text-center">
-                        <tr>
-                            <th width="1%" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            ID
-                            </th>
-                            {{-- image --}}
-                            <th scope="col" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Product Image
-                            </th>
-                            <th scope="col" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Product Name
-                            </th>
-                            <th scope="col" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Product Price
-                            </th>
-                            <th scope="col" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Product Quantity
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach ($products as $product)
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{$product->id}}</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900 flex justify-center">
-                                        <img src="{{asset('img/products/'.$product->image)}}" alt="" width="60px" height="60px">
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{$product->name}}</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{$product->price}} Dhs</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{$product->quantity}}</div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="overflow-x-auto">
+                    <div class="w-full">
+
+                    
+                        <table class="w-full divide-y text-center divide-gray-200">
+                            <thead class="bg-gray-50 text-center">
+                                <tr>
+                                    <th width="1%" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    ID
+                                    </th>
+                                    {{-- image --}}
+                                    <th scope="col" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Product Image
+                                    </th>
+                                    <th scope="col" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Product Name
+                                    </th>
+                                    <th scope="col" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Product Price
+                                    </th>
+                                    <th scope="col" class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Product Quantity
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                @foreach ($products as $product)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">{{$product->id}}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900 flex justify-center">
+                                                <img src="{{asset('img/products/'.$product->image)}}" alt="" width="60px" height="60px">
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">{{$product->name}}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">{{$product->price}} Dhs</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">{{$product->quantity}}</div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 
