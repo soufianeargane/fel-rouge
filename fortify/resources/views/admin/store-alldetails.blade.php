@@ -6,9 +6,9 @@
     {{ $store->title }}
 
     </span>
-    <div class="flex justify-center py-5 bg-gray-100 2">
+    <div class="flex flex-wrap justify-between py-5 bg-gray-100">
         <!---== First Stats Container ====--->
-        <div class="container mx-auto pr-2">
+        <div class=" mx-auto mb-2">
             <div class="w-52 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
             <div class="h-12 bg-red-400 flex items-center justify-between">
                 <p class="mr-0 text-white text-lg pl-5">Products</p>
@@ -19,7 +19,7 @@
             <!-- <hr > -->
             </div>
         </div>
-        <div class="container mx-auto pr-2">
+        <div class=" mx-auto mb-2">
             <div class="w-52 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
             <div class="h-12 bg-red-400 flex items-center justify-between">
                 <p class="mr-0 text-white text-lg pl-5">Orders</p>
@@ -41,7 +41,7 @@
             <!-- <hr > -->
             </div>
         </div>
-        <div class="container mx-auto pr-2">
+        <div class=" mx-auto mb-2">
             <div class="w-52 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
             <div class="h-12 bg-red-400 flex items-center justify-between">
                 <p class="mr-0 text-white text-lg pl-5">Profit</p>
@@ -52,7 +52,7 @@
             <!-- <hr > -->
             </div>
         </div>
-        <div class="container mx-auto pr-2">
+        <div class=" mx-auto mb-2">
             <div class="w-52 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
             <div class="h-12 bg-red-400 flex items-center justify-between">
                 <p class="mr-0 text-white text-lg pl-5">Owner</p>

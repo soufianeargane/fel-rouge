@@ -119,3 +119,5 @@ Route::middleware(['auth', 'user'])->group(function () {
 
 
 Route::post('/contact-store', [ContactController::class, 'store'])->name('contact.store');
+
+

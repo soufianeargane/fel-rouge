@@ -44,10 +44,9 @@
                 </div>
                 <div class="ul__app">
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#service">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                     <a href="{{url('/login')}}">
                         <button>Login</button>
@@ -59,10 +58,9 @@
             </div>
             <div id="navbar" class="ul__phone navv">
                 <ul class="navv">
-                    <li class="navv"><a class="navv" href="#">Home</a></li>
-                    <li class="navv"><a class="navv" href="#">About</a></li>
-                    <li class="navv"><a class="navv" href="#">Services</a></li>
-                    <li class="navv"><a class="navv" href="#">Contact</a></li>
+                    <li class="navv"><a class="navv" href="#about">About</a></li>
+                    <li class="navv"><a class="navv" href="#service">Services</a></li>
+                    <li class="navv"><a class="navv" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -81,7 +79,7 @@
         </div>
     </header>
 
-    <service>
+    <service id="service">
         <div class="container mx-auto mt-20">
             <p class="p-title">SERVICES</p>
             <h1 class="p__head">Why we are different </h1>
@@ -177,7 +175,7 @@
         </div>
     </service>
 
-    <about class="">
+    <about id="about" class="">
         <div class="pb-8 bg-white">
             <div class="container my-20">
                 <div class="about">
@@ -196,7 +194,7 @@
         </div>
     </about>
 
-    <div class="contact">
+    <div id="contact" class="contact">
         <div class="container">
             <div class="contact__">
                 <p class="p-title">CONTACT</p>

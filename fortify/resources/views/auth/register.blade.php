@@ -90,6 +90,9 @@
                     <h3>
                         <span class="text-2xl font-bold">Welcome !!</span>
                     </h3>
+                    <p> Already have an account?
+                        <a href="{{route('login')}}" class="text-blue-500">Login</a>
+                    </p>
                 </div>
                 @csrf
                 <br><input class="appearance-none block w-full  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" value="{{old('name')}}" type="text" name="name" id="name" placeholder="Name">

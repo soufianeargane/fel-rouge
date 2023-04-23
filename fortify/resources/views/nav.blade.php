@@ -19,6 +19,7 @@
                 </a>
             </div>
             <div class="flex justify-between items-center">
+                @if (Auth::check())
                 <ul class="flex justify-between items-center">
                     <li class="mr-6">
                         <a href="{{route('user.orders')}}">
@@ -32,7 +33,7 @@
                     </li>
                 </ul>
 
-                @if (Auth::check())
+                
                     <div class="icons d-flex align-center">
 
                         <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
