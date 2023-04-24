@@ -47,7 +47,7 @@
                 </div>
             @endif
             <div class="p-2 md:p-5">
-                <form class="w-full" action="{{route('store.store')}}" method="post" enctype="multipart/form-data">
+                <form class="w-full" action="{{route('store.store')}}" method="post" autocomplete="on"  enctype="multipart/form-data">
                     @csrf
                     <div class="relative z-0 w-full mb-6 group">
                         <input  value="{{old('title')}}" type="text" name="title" id="title" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" "  />
@@ -57,9 +57,10 @@
                         <input value="{{old('phone')}}" type="text" name="phone" id="phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" "  />
                         <label for="phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone</label>
                     </div>
-                    <div>
+                    <div class="relative z-0 w-full mb-6 group">
                     <!-- <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select your city</label> -->
-                        <select id="countries" name="city_id" class="bg-gray-50 mb-6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-green-600">
+                        <select id="countries" name="city_id"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-600 peer">
                         <option selected disabled >select a city</option>
                         @foreach ($cities as $city)
                             <option value="{{$city->id}}">{{$city->name}}</option>
@@ -70,8 +71,8 @@
                         <input type="text" name="neighborhood" id="neighborhood" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" "  />
                         <label for="neighborhood" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Neighberhood</label>
                     </div>
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Upload file</label>
+                    <div class="relative z-0 w-full mb-6 group">
+                        <label class="block mb-2 text-sm text-sm text-gray-500 dark:text-gray-400" for="image">Upload file</label>
                         <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="image" type="file" name="image">
                         <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">The image should be of Your Store</div>
                     </div>

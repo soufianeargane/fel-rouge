@@ -52,11 +52,20 @@ class AdminController extends Controller
         }
 
 
-        $topStores = Store::withCount('orders')
-            ->withSum('orders', 'total_price')
-            ->orderBy('orders_sum_total_price', 'desc')
-            ->limit(3)
-            ->get();
+        // $topStores = Store::withCount('orders')
+        //     ->withSum('orders', 'total_price')
+        //     ->orderBy('orders_sum_total_price', 'desc')
+        //     ->limit(3)
+        //     ->get();
+        $topStores = Store::withCount(['orders' => function ($query) {
+            $query->where('status', 1);
+        }])
+        ->withSum(['orders' => function ($query) {
+            $query->where('status', 1);
+        }], 'total_price')
+        ->orderBy('orders_sum_total_price', 'desc')
+        ->limit(3)
+        ->get();
 
 
         $total_profit = Order::where('status', 1)->sum('total_price');
